@@ -1,6 +1,11 @@
 const MainLayout = () => {
   return (
-    <div>MainLayout</div>
-  )
-}
-export default MainLayout
+    <div>
+      {/* menu bar */}
+      <div></div>
+      {/* content */}
+      <div></div>
+    </div>
+  );
+};
+export default MainLayout;
