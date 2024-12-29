@@ -7,13 +7,16 @@
     "skipLibCheck": true,
 
     "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["src/*"],
+    //   "@components/*": ["src/components/*"],
+    //   "@pages/*": ["src/pages/*"],
+    //   "@redux/*": ["src/redux/*"],
+    //   "@routes/*": ["src/routes/*"],
+    //   "@layouts/*": ["src/layouts/*"]
+    // },
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "@redux/*": ["src/redux/*"],
-      "@routes/*": ["src/routes/*"],
-      "@layouts/*": ["src/layouts/*"]
+      "@/*": ["./src/*"]
     },
     /* Bundler mode */
     "moduleResolution": "bundler",
