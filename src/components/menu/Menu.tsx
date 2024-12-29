@@ -11,6 +11,7 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import logo from "/src/assets/ecoCollect.svg";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Menu items.
 const primaryMenuItems = [
@@ -176,6 +177,8 @@ const userMenuItems = [
 ];
 
 const Menu = () => {
+  const isMobile = useIsMobile();
+
   return (
     <Sidebar className="">
       <SidebarContent>
@@ -185,7 +188,7 @@ const Menu = () => {
           aria-label="home"
           className="flex items-center justify-center pb-4 pt-12"
         >
-          <div className="w-[180px] h-[58px]">
+          <div className="w-[100px] md:w-[180px] h-[58px]">
             <img
               src={logo}
               alt="EcoCollect logo"
@@ -245,7 +248,7 @@ const Menu = () => {
                       aria-label={item.title}
                     >
                       <span>{item.icon}</span>
-                      <span>{item.title}</span>
+                      {!isMobile && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
