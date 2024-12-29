@@ -1,3 +1,4 @@
+import MainLayout from "@/layouts/MainLayout/MainLayout";
 import Analytics from "@/pages/analytics/Analytics";
 import Collectors from "@/pages/collectors/Collectors";
 import Customers from "@/pages/customers/Customers";
@@ -5,7 +6,6 @@ import Logout from "@/pages/logout/Logout";
 import Overview from "@/pages/overview/Overview";
 import Settings from "@/pages/settings/Settings";
 import WasteTransactions from "@/pages/wasteTransactions/WasteTransactions";
-import MainLayout from "@layouts/MainLayout/MainLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter(
