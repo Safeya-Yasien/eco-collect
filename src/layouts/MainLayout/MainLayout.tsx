@@ -12,7 +12,7 @@ const MainLayout = () => {
       </SidebarProvider>
       {/* </div> */}
       {/* content */}
-      <div className="w-[calc(100% - 355px)] bg-[#F5F5F5] p-4 pt-16">
+      <div className="w-[calc(100%-355px)] bg-[#F5F5F5] p-4 pt-16">
         {/* weekly overview */}
         <Outlet />
       </div>
