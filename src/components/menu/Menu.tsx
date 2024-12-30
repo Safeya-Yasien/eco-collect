@@ -35,7 +35,7 @@ const primaryMenuItems = [
   },
   {
     title: "Waste Transactions",
-    url: "/waste-transactions",
+    url: "waste-transactions",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ const primaryMenuItems = [
   },
   {
     title: "Collectors",
-    url: "/Collectors",
+    url: "collectors",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
