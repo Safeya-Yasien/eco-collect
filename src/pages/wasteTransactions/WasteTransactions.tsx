@@ -7,52 +7,47 @@ import { userRows } from "@/data/userRows";
 import "./wasteTransactions.css";
 
 const columns: GridColDef<(typeof userRows)[number]>[] = [
-  { field: "transactionID", headerName: "Transaction ID", width: 90 },
+  { field: "transactionID", headerName: "Transaction ID", width: 150 },
   {
     field: "Date",
-    headerName: "date",
-    width: 150,
+    headerName: "Date",
+    width: 150, // Adjusted for date formatting
     editable: true,
   },
   {
     field: "customerName",
-    headerName: "customer name",
-    width: 150,
+    headerName: "Customer Name",
+    width: 180, // Adjusted for longer names
     editable: true,
   },
   {
     field: "collectorName",
-    headerName: "collector name",
-    type: "number",
-    width: 110,
+    headerName: "Collector Name",
+    width: 180, // Adjusted for longer names
     editable: true,
   },
   {
     field: "wasteAmount",
-    headerName: "waste amount",
-    type: "number",
-    width: 110,
+    headerName: "Waste Amount",
+    width: 150,
     editable: true,
   },
   {
     field: "price",
     headerName: "Price",
-    type: "number",
-    width: 110,
+    width: 130, // Slight increase to accommodate larger values
     editable: true,
   },
   {
     field: "paymentMethod",
-    headerName: "payment method",
-    type: "number",
-    width: 110,
+    headerName: "Payment Method",
+    width: 180, // Adjusted for varied payment methods
     editable: true,
   },
   {
     field: "status",
-    headerName: "status",
-    type: "number",
-    width: 110,
+    headerName: "Status",
+    width: 120, // Slight increase to better accommodate status
     editable: true,
     renderCell: (params) => {
       let statusStyle = {};
