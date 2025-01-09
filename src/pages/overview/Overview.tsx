@@ -8,17 +8,17 @@ const Overview = () => {
         Your Weekly Overview
       </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5">
         <div className="flex flex-col items-center justify-center p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
-        <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
-        total waste collected
+          <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
+            total waste collected
           </h3>
           <img src={tons} alt="tons" loading="lazy" />
           <h3 className="text-[32px] font-bold ">2 Tons</h3>
           <p className="text-[20px] font-normal ">200kg more than last week</p>
         </div>
         <div className="flex flex-col items-center justify-center p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
-        <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
+          <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
             total waste collected
           </h3>
           <img src={tons} alt="tons" loading="lazy" />
@@ -26,7 +26,7 @@ const Overview = () => {
           <p className="text-[20px] font-normal ">200kg more than last week</p>
         </div>
         <div className="flex flex-col items-center justify-center   p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
-        <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
+          <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
             total waste collected
           </h3>
           <img src={tons} alt="tons" loading="lazy" />
@@ -34,7 +34,7 @@ const Overview = () => {
           <p className="text-[20px] font-normal ">200kg more than last week</p>
         </div>
         <div className="flex flex-col items-center justify-center   p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
-        <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
+          <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
             total waste collected
           </h3>
           <img src={tons} alt="tons" loading="lazy" />
