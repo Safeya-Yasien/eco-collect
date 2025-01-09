@@ -15,7 +15,9 @@ const Overview = () => {
           </h3>
           <img src={tons} alt="tons" loading="lazy" />
           <h3 className="text-[32px] font-bold ">2 Tons</h3>
-          <p className="text-[20px] font-normal ">200kg more than last week</p>
+          <p className="text-xs md:text-[20px] font-normal ">
+            200kg more than last week
+          </p>
         </div>
         <div className="flex flex-col items-center justify-center p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
           <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
@@ -23,7 +25,9 @@ const Overview = () => {
           </h3>
           <img src={tons} alt="tons" loading="lazy" />
           <h3 className="text-[32px] font-bold ">2 Tons</h3>
-          <p className="text-[20px] font-normal ">200kg more than last week</p>
+          <p className="text-xs md:text-[20px] font-normal ">
+            200kg more than last week
+          </p>
         </div>
         <div className="flex flex-col items-center justify-center   p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
           <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
@@ -31,7 +35,7 @@ const Overview = () => {
           </h3>
           <img src={tons} alt="tons" loading="lazy" />
           <h3 className="text-[32px] font-bold ">2 Tons</h3>
-          <p className="text-[20px] font-normal ">200kg more than last week</p>
+          <p className="text-xs md:text-[20px] font-normal ">200kg more than last week</p>
         </div>
         <div className="flex flex-col items-center justify-center   p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
           <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
@@ -39,7 +43,7 @@ const Overview = () => {
           </h3>
           <img src={tons} alt="tons" loading="lazy" />
           <h3 className="text-[32px] font-bold ">2 Tons</h3>
-          <p className="text-[20px] font-normal ">200kg more than last week</p>
+          <p className="text-xs md:text-[20px] font-normal ">200kg more than last week</p>
         </div>
       </div>
 
