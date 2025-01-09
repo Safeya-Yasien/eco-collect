@@ -86,39 +86,41 @@ const Collectors = () => {
       </Box>
 
       {/* Find Collector Section */}
-      <h3 className="text-black font-normal text-[24px] mt-[40px]">
+      <h3 className="text-black font-normal text-sm md:text-[24px] mt-[40px]">
         Find out how each collector is doing
       </h3>
 
       {/* find collector */}
       <div className="flex items-center mt-[20px] gap-[24px]">
-        <div className="flex items-center gap-2 ">
-          <p className="capitalize font-normal text-[20px]">
+        <div className="flex items-center gap-2 flex-wrap ">
+          <p className="capitalize font-normal text-sm md:text-[20px]">
             type collector’s iD
           </p>
-          <input
-            type="text"
-            value={collectorID}
-            onChange={(e) => setCollectorID(e.target.value)}
-            placeholder="Search..."
-            className="px-4 py-2 border rounded-[83px] outline-none bg-[#DEDEDE]"
-          />
+          <div className="flex items-center gap-4">
+            <input
+              type="text"
+              value={collectorID}
+              onChange={(e) => setCollectorID(e.target.value)}
+              placeholder="Search..."
+              className="w-[150px] md:w-auto px-4 py-2 border rounded-[83px] outline-none bg-[#DEDEDE]"
+            />
+            <button
+              onClick={handleSearch}
+              className="w-[98px] h-[35px] rounded-[8px] bg-[#2E7D32] text-white font-normal text-[16px]"
+            >
+              Find
+            </button>
+          </div>
         </div>
-        <button
-          onClick={handleSearch}
-          className="w-[98px] h-[35px] rounded-[8px] bg-[#2E7D32] text-white font-normal text-[16px]"
-        >
-          Find
-        </button>
       </div>
 
       {/* If collector is found, display details */}
       {foundCollector && (
         <div
-          className="mt-8 p-6 rounded-[12px] shadow-[4px_4px_4px_0px_#00000040] bg-white border-[2px] border-[#B0BEC5] w-[520px] 
-                        flex justify-between gap-4 relative"
+          className="mt-8 p-6 rounded-[12px] shadow-[4px_4px_4px_0px_#00000040] bg-white border-[2px] border-[#B0BEC5] w-auto md:w-[520px] 
+                         flex justify-between gap-4 relative"
         >
-          <div className="flex gap-[16px] flex-1">
+          <div className="flex gap-6 md:gap-[16px] flex-1 flex-col md:flex-row">
             <div className="w-[78px] h-[78px]">
               <img
                 src={foundCollector.imgUrl}
@@ -127,21 +129,21 @@ const Collectors = () => {
               />
             </div>
             <div className="flex-1 flex flex-col gap-3">
-              <p className="flex items-center justify-between">
+              <p className="flex items-center justify-between text-xs md:text-[16px] ">
                 <span>Collector ID</span> {foundCollector.collectorID}
               </p>
-              <p className="flex items-center justify-between">
+              <p className="flex items-center justify-between text-xs md:text-[16px] ">
                 <span>Collector Name</span> {foundCollector.name}
               </p>
-              <p className="flex items-center justify-between">
+              <p className="flex items-center justify-between text-xs md:text-[16px] ">
                 <span>Total Waste Collected</span> {foundCollector.totalWaste}{" "}
                 kg
               </p>
-              <p className="flex items-center justify-between">
+              <p className="flex items-center justify-between text-xs md:text-[16px] ">
                 <span>Completed Transactions</span>{" "}
                 {foundCollector.completedTransactions}
               </p>
-              <p className="flex items-center justify-between">
+              <p className="flex items-center justify-between text-xs md:text-[16px] ">
                 <span>Ratings</span> {foundCollector.ratings}/5
               </p>
             </div>

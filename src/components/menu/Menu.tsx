@@ -1,17 +1,6 @@
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
-
 import { Link, NavLink } from "react-router-dom";
 import logo from "/src/assets/ecoCollect.svg";
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 // Menu items.
 const primaryMenuItems = [
@@ -177,87 +166,71 @@ const userMenuItems = [
 ];
 
 const Menu = () => {
-  const isMobile = useIsMobile();
-
   return (
-    <Sidebar className="">
-      <SidebarContent>
-        {/* logo */}
-        <Link
-          to="/"
-          aria-label="home"
-          className="flex items-center justify-center pb-4 pt-12"
-        >
-          <div className="w-[100px] md:w-[180px] h-[58px]">
-            <img
-              src={logo}
-              alt="EcoCollect logo"
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </Link>
+    <aside className="bg-[#B0BEC5] rounded-tr-[74px] rounded-br-[74px] flex flex-col py-[75px] h-full">
+      {/* Logo */}
+      <Link
+        to="/"
+        aria-label="home"
+        className="flex items-center justify-center pb-[40px] "
+      >
+        <div className="w-[80px] md:w-[180px] h-[58px]">
+          <img
+            src={logo}
+            alt="EcoCollect logo"
+            className="w-full h-full object-contain"
+          />
+        </div>
+      </Link>
 
-        {/* line */}
-        <div className="h-[1px] bg-[#F5F5F5] w-full " />
+      <div className="h-[1px] bg-[#F5F5F5] w-full" />
 
-        <SidebarGroup className="py-6 px-4 pb-[80px]">
-          <SidebarGroupContent>
-            <SidebarMenu className="gap-6">
-              {primaryMenuItems.map((item) => (
-                <SidebarMenuItem key={item.title} className="">
-                  <SidebarMenuButton asChild>
-                    <NavLink
-                      to={item.url}
-                      className={({ isActive }) =>
-                        cn(
-                          "text-black text-2xl font-normal capitalize py-6  ",
-                          "hover:bg-transparent",
-                          isActive ? "border-l-4 " : " "
-                        )
-                      }
-                    >
-                      <span>{item.icon}</span>
-                      <span>{item.title}</span>
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+      {/* Menu */}
+      <div className="flex-1 flex flex-col mt-[40px] px-[22px]">
+        <ul className="flex w-full flex-col mb-[120px]">
+          {primaryMenuItems.map((item, index) => (
+            <li key={index} className="relative">
+              <NavLink
+                to={item.url}
+                className={({ isActive }) =>
+                  cn(
+                    "text-black text-2xl font-normal capitalize px-4 py-6 flex items-center gap-[4px]",
+                    "hover:bg-transparent",
+                    isActive ? "border-l-4 rounded-l-[10px]" : ""
+                  )
+                }
+              >
+                <span className="">{item.icon}</span>
+                <span className="hidden md:flex">{item.title}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
-        {/* line */}
-        <div className="h-[1px] bg-[#F5F5F5] w-full " />
+        <div className="h-[1px] bg-[#F5F5F5] w-full" />
 
-        {/* settings & logout */}
-        <SidebarGroup className="py-6 px-4">
-          <SidebarGroupContent>
-            <SidebarMenu className="gap-6">
-              {userMenuItems.map((item) => (
-                <SidebarMenuItem key={item.title} className="">
-                  <SidebarMenuButton asChild>
-                    <NavLink
-                      to={item.url}
-                      className={({ isActive }) =>
-                        cn(
-                          "text-black text-2xl font-normal capitalize py-6  ",
-                          "hover:bg-transparent",
-                          isActive ? "border-l-4 " : " "
-                        )
-                      }
-                      aria-label={item.title}
-                    >
-                      <span>{item.icon}</span>
-                      {!isMobile && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+        <ul className="flex w-full flex-col mt-[22px] ">
+          {userMenuItems.map((item, index) => (
+            <li key={index} className="relative">
+              <NavLink
+                to={item.url}
+                className={({ isActive }) =>
+                  cn(
+                    "text-black text-2xl font-normal capitalize px-4 py-6 flex items-center gap-[4px]",
+                    "hover:bg-transparent",
+                    isActive ? "border-l-4 rounded-l-[10px]" : ""
+                  )
+                }
+              >
+                <span className="">{item.icon}</span>
+                <span className="hidden md:flex"> {item.title}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
   );
 };
+
 export default Menu;
