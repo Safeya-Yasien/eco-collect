@@ -1,4 +1,3 @@
 import DataTable from "./dataTable/DataTable";
 
-
-export { DataTable}
+export { DataTable };
