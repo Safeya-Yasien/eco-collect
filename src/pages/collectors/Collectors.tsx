@@ -82,7 +82,12 @@ const Collectors = () => {
       </h2>
 
       <Box sx={{ height: 350, width: "100%" }}>
-        <DataTable columns={columns} rows={collectorRows} />
+        <DataTable
+          columns={columns}
+          rows={collectorRows}
+          showExport={false}
+          showFilter={false}
+        />
       </Box>
 
       {/* Find Collector Section */}
