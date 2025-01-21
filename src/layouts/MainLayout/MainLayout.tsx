@@ -1,10 +1,12 @@
 import Menu from "@/components/menu/Menu";
+import { ScrollToTop } from "@/components/shared";
 
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
     <div className=" flex bg-[#F5F5F5] overflow-x-hidden">
+      <ScrollToTop />
       {/* menu bar */}
       <div className=" w-[100px] md:w-[340px]">
         <Menu />
