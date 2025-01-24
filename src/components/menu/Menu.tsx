@@ -174,7 +174,7 @@ const Menu = () => {
         aria-label="home"
         className="flex items-center justify-center pb-[40px] "
       >
-        <div className="w-[80px] md:w-[180px] h-[58px]">
+        <div className="w-[80px] md:w-[200px] h-[58px]">
           <img
             src={logo}
             alt="EcoCollect logo"

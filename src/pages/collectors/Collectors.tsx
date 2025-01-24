@@ -22,13 +22,13 @@ interface ICollectorProps {
 }
 
 const columns: GridColDef<(typeof collectorRows)[number]>[] = [
-  { field: "collectorID", headerName: "Collector ID", width: 120 },
+  { field: "collectorID", headerName: "Collector ID", width: 180 },
   { field: "name", headerName: "Name", width: 150, editable: true },
   { field: "email", headerName: "Email", width: 200, editable: true },
   {
     field: "phoneNumber",
     headerName: "Phone Number",
-    width: 150,
+    width: 180,
     editable: true,
   },
   {
