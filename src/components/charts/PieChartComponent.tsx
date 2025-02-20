@@ -5,7 +5,7 @@ interface IPieChart {
   options: any;
 }
 
-const PieChart = ({ data, options }: IPieChart) => {
+const PieChartComponent = ({ data, options }: IPieChart) => {
   return (
     <div>
       <Chart
@@ -18,4 +18,4 @@ const PieChart = ({ data, options }: IPieChart) => {
     </div>
   );
 };
-export default PieChart;
+export default PieChartComponent;

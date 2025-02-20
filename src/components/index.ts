@@ -1,4 +1,5 @@
 import DataTable from "./dataTable/DataTable";
-import PieChart from "./charts/PieChart";
+import PieChartComponent from "./charts/PieChartComponent";
+import BarChartComponent from "./charts/BarChartComponent";
 
-export { DataTable, PieChart };
+export { DataTable, PieChartComponent,BarChartComponent };
