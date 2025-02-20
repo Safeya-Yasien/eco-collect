@@ -110,7 +110,7 @@ const Analytics = () => {
       {/* Bar Chart - Centered & Reduced Width */}
       <div className="w-full flex flex-col items-center mt-24">
         <h3 className="text-black text-[20px] font-bold">
-          Collectors Performance
+          Collectors’ Performance
         </h3>
         <BarChartComponent data={collectorsPerformanceData} />
       </div>
