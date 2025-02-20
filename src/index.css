@@ -90,3 +90,31 @@ body {
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
+
+.recharts-legend-wrapper {
+  right: -100px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+
+  .recharts-default-legend {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px;
+  }
+  .recharts-legend-item {
+    margin-right: 0px !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    gap: 5px;
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+    span {
+      color: black !important;
+    }
+  }
+}

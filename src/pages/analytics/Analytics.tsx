@@ -1,18 +1,16 @@
 import { PieChart } from "@/components";
-import Chart from "react-google-charts";
-// import React, { PureComponent } from "react";
-// import {
-//   BarChart,
-//   Bar,
-//   Cell,
-//   XAxis,
-//   YAxis,
-//   CartesianGrid,
-//   Tooltip,
-//   Legend,
-//   ResponsiveContainer,
-//   Rectangle,
-// } from "recharts";
+
+import {
+  Tooltip,
+  Legend,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+  ReferenceLine,
+} from "recharts";
 
 const Analytics = () => {
   const collectedWasteTypesData = [
@@ -97,63 +95,11 @@ const Analytics = () => {
 
   // bar char
   const collectorsPerformanceData = [
-    ["Rate", "Deals", "Expenses"],
-    ["1", 10, 90],
-    ["2", 5, 98],
-    ["3", 15, 100],
-    ["4", 8, 90],
+    { name: "1", Deals: 10, Expenses: 90 },
+    { name: "2", Deals: 5, Expenses: 98 },
+    { name: "3", Deals: 15, Expenses: 100 },
+    { name: "4", Deals: 8, Expenses: 90 },
   ];
-
-  // //  chart options
-  const collectorsPerformanceOptions = {
-    chart: {
-      title: "Collectors’ Performance",
-    },
-    backgroundColor: "transparent", // Removes the chart container background
-    chartArea: {
-      left: "10%",
-      width: "80%",
-      height: "80%",
-      backgroundColor: "none", // Ensures the plot area itself is transparent
-    },
-    legend: {
-      position: "bottom",
-      textStyle: { color: "#000" },
-    },
-    colors: ["#2E7D32", "#FFEB3B"],
-    vAxis: {
-      title: "Performance Rate",
-      format: "0",
-      gridlines: { count: 20 },
-    },
-  };
-
-  // const collectorsPerformanceData = [
-  //   {
-  //     name: "1",
-  //     uv: 10,
-  //     pv: 90,
-  //     amt: 2400,
-  //   },
-  //   {
-  //     name: "2",
-  //     uv: 3000,
-  //     pv: 1398,
-  //     amt: 2210,
-  //   },
-  //   {
-  //     name: "3",
-  //     uv: 2000,
-  //     pv: 9800,
-  //     amt: 2290,
-  //   },
-  //   {
-  //     name: "4",
-  //     uv: 2780,
-  //     pv: 3908,
-  //     amt: 2000,
-  //   },
-  // ];
 
   return (
     <div>
@@ -173,54 +119,52 @@ const Analytics = () => {
         />
       </div>
 
-      {/* bar char */}
-      <Chart
-        // Note the usage of Bar and not BarChart for the material version
-        chartType="Bar"
-        loader={<div>Loading Chart...</div>}
-        data={collectorsPerformanceData}
-        options={collectorsPerformanceOptions}
-        height={"400px"}
-        width={"600px"}
-      />
-
-      {/* <div className="flex justify-center items-center w-full">
-        <ResponsiveContainer width="80%" height={400}>
+      {/* Bar Chart - Centered & Reduced Width */}
+      <div className="flex flex-col items-center">
+        <h3 className="text-black text-[20px] font-bold mb-4">
+          Collectors Performance
+        </h3>
+        <ResponsiveContainer width="70%" height={400}>
           <BarChart
-            width={500}
-            height={300}
             data={collectorsPerformanceData}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
+            margin={{ right: 30, left: 20, bottom: 5 }}
+            barGap={1}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" /><YAxis 
-  domain={[0, 100]} 
-  ticks={[0, 20, 40, 60, 80, 100]} 
-  scale="linear" // Use linear scale
-  interval={0} // Ensure all ticks are visible
-/>
-
+            <CartesianGrid stroke="#ccc" vertical={false} />
+            <XAxis
+              dataKey="name"
+              tickLine={false}
+              tick={{ fill: "#222222", fontSize: 13 }}
+            />
+            <YAxis
+              domain={[0, "dataMax"]}
+              ticks={[0, 20, 40, 60, 80, 100]}
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#444444", fontSize: 14 }}
+            />
             <Tooltip />
-            <Legend />
-            <Bar
-              dataKey="pv"
-              fill="#2E7D32"
-              // "#2E7D32", "#FFEB3B"
-              activeBar={<Rectangle fill="pink" stroke="blue" />}
+            <Legend
+              verticalAlign="top"
+              align="right"
+              style={{ color: "#000" }}
+              wrapperStyle={{
+                color: "#000",
+              }}
             />
-            <Bar
-              dataKey="uv"
-              fill="#FFEB3B"
-              activeBar={<Rectangle fill="gold" stroke="purple" />}
-            />
+
+            <ReferenceLine y={10} stroke="#EBEBEB" />
+            <ReferenceLine y={30} stroke="#EBEBEB" />
+            <ReferenceLine y={50} stroke="#EBEBEB" />
+            <ReferenceLine y={70} stroke="#EBEBEB" />
+            <ReferenceLine y={90} stroke="#EBEBEB" />
+            <ReferenceLine y={110} stroke="#EBEBEB" />
+
+            <Bar dataKey="Deals" fill="#2E7D32" barSize={40} />
+            <Bar dataKey="Expenses" fill="#FFEB3B" barSize={40} />
           </BarChart>
         </ResponsiveContainer>
-      </div> */}
+      </div>
     </div>
   );
 };
