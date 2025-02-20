@@ -19,7 +19,7 @@ const Settings = () => {
         settings
       </h2>
 
-      <div className="w-[60%] flex flex-col gap-[22px]">
+      <div className="w-full md:w-[60%] flex flex-col gap-[22px]">
         {/* user management */}
         <div className="">
           <h3 className="text-sm font-bold text-[#2E7D32] mb-[6px]">
