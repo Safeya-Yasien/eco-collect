@@ -93,6 +93,7 @@ body {
 
 .recharts-legend-wrapper {
   right: -100px !important;
+  top: 60px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-end !important;

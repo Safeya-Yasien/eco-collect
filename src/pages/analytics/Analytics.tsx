@@ -120,8 +120,8 @@ const Analytics = () => {
       </div>
 
       {/* Bar Chart - Centered & Reduced Width */}
-      <div className="flex flex-col items-center">
-        <h3 className="text-black text-[20px] font-bold mb-4">
+      <div className="flex flex-col items-center mt-24">
+        <h3 className="text-black text-[20px] font-bold">
           Collectors Performance
         </h3>
         <ResponsiveContainer width="70%" height={400}>
