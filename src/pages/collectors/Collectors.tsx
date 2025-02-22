@@ -101,7 +101,7 @@ const Collectors = () => {
           <p className="capitalize font-normal text-sm md:text-[20px]">
             type collector’s iD
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-4">
             <input
               type="text"
               value={collectorID}

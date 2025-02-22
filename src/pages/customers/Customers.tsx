@@ -53,7 +53,11 @@ const Customers = () => {
         freeMode={true}
         modules={[Pagination, FreeMode]}
         pagination={{ clickable: true }}
-        className="mySwiper h-[260px]"
+        className="mySwiper h-[385px] sm:h-[260px]"
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+        }}
       >
         {customerRows.map((customer) => (
           <SwiperSlide key={customer.customerID} className="">
