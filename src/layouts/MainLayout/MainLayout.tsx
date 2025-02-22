@@ -8,7 +8,7 @@ const MainLayout = () => {
     <div className=" flex bg-[#F5F5F5] overflow-x-hidden">
       <ScrollToTop />
       {/* menu bar */}
-      <div className=" w-[100px] md:w-[340px]">
+      <div className="w-[100px] md:w-[340px] ">
         <Menu />
       </div>
       {/* content */}

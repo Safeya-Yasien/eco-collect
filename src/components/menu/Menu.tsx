@@ -167,12 +167,12 @@ const userMenuItems = [
 
 const Menu = () => {
   return (
-    <aside className="bg-[#B0BEC5] rounded-tr-[74px] rounded-br-[74px] flex flex-col py-[75px] h-full ">
+    <aside className="bg-[#B0BEC5] md:rounded-tr-[74px] md:rounded-br-[74px] flex flex-col py-[75px] fixed left-0 top-0 h-screen overflow-y-auto scrollbar-hide">
       {/* Logo */}
       <Link
         to="/"
         aria-label="home"
-        className="flex items-center justify-center pb-[40px] "
+        className="flex flex-col items-center justify-center pb-[40px] "
       >
         <div className="w-[80px] md:w-[200px] h-[58px]">
           <img
@@ -181,12 +181,11 @@ const Menu = () => {
             className="w-full h-full object-contain"
           />
         </div>
+        <div className="h-[1px] bg-[#F5F5F5] w-full mt-10" />
       </Link>
 
-      <div className="h-[1px] bg-[#F5F5F5] w-full" />
-
       {/* Menu */}
-      <div className="flex-1 flex flex-col mt-[40px] px-[22px] ">
+      <div className="flex-1 flex flex-col px-[22px] ">
         <ul className="flex w-full flex-col mb-[120px]">
           {primaryMenuItems.map((item, index) => (
             <li key={index} className="relative">
