@@ -145,7 +145,7 @@ const userMenuItems = [
   },
   {
     title: "Logout",
-    url: "/logout",
+    url: "/",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
