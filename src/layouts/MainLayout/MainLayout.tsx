@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div className=" flex bg-[#F5F5F5] overflow-x-hidden">
+    <div className=" flex bg-[#F5F5F5] overflow-x-hidden min-h-[100dvh]">
       <ScrollToTop />
       {/* menu bar */}
       <div className="w-[100px] md:w-[340px] ">
