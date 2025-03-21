@@ -11,19 +11,19 @@ const columns: GridColDef<(typeof userRows)[number]>[] = [
   {
     field: "Date",
     headerName: "Date",
-    width: 150, 
+    width: 150,
     editable: true,
   },
   {
     field: "customerName",
     headerName: "Customer Name",
-    width: 200, 
+    width: 200,
     editable: true,
   },
   {
     field: "collectorName",
     headerName: "Collector Name",
-    width: 200, 
+    width: 200,
     editable: true,
   },
   {
@@ -35,19 +35,19 @@ const columns: GridColDef<(typeof userRows)[number]>[] = [
   {
     field: "price",
     headerName: "Price",
-    width: 130, 
+    width: 130,
     editable: true,
   },
   {
     field: "paymentMethod",
     headerName: "Payment Method",
-    width: 200, 
+    width: 200,
     editable: true,
   },
   {
     field: "status",
     headerName: "Status",
-    width: 120, 
+    width: 120,
     editable: true,
     renderCell: (params) => {
       let statusStyle = {};
@@ -68,11 +68,11 @@ const columns: GridColDef<(typeof userRows)[number]>[] = [
 const WasteTransactions = () => {
   return (
     <div>
-      <h2 className="text-black text-[32px] font-bold capitalize mb-[40px]">
-        waste transactions{" "}
+      <h2 className="text-black text-[20px] md:text-[32px] font-bold capitalize mb-[40px]">
+      waste transactions
       </h2>
 
-      <Box sx={{ minHeight: 500, width: "100%" }}>
+      <Box sx={{ minHeight: 500, width: "100%" }} >
         <DataTable columns={columns} rows={userRows} />
       </Box>
     </div>
