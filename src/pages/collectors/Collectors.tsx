@@ -52,19 +52,17 @@ const columns: GridColDef<(typeof collectorRows)[number]>[] = [
 ];
 
 const Collectors = () => {
-  const [collectorID, setCollectorID] = useState<string>("");
-  const [foundCollector, setFoundCollector] = useState<ICollectorProps | null>(
-    null
-  );
+  const [collectorName, setCollectorName] = useState<string>("");
+  const [foundCollectors, setFoundCollectors] = useState<ICollectorProps[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleSearch = () => {
-    const paddedCollectorID = String(Number(collectorID)).padStart(4, "0");
+    const searchTerm = collectorName.trim().toLowerCase();
 
-    const collector = collectorRows.find(
-      (collector) => collector.collectorID === paddedCollectorID
+    const matchedCollectors = collectorRows.filter((collector) =>
+      collector.name.toLowerCase().includes(searchTerm)
     );
-    setFoundCollector(collector || null);
+    setFoundCollectors(matchedCollectors);
   };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -99,13 +97,13 @@ const Collectors = () => {
       <div className="flex items-center mt-[20px] gap-[24px]">
         <div className="flex items-center gap-2 flex-wrap ">
           <p className="capitalize font-normal text-sm md:text-[20px]">
-            type collector’s iD
+            type collector’s Name
           </p>
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-4">
             <input
               type="text"
-              value={collectorID}
-              onChange={(e) => setCollectorID(e.target.value)}
+              value={collectorName}
+              onChange={(e) => setCollectorName(e.target.value)}
               placeholder="Search..."
               className="w-[150px] md:w-auto px-4 py-2 border rounded-[83px] outline-none bg-[#DEDEDE]"
             />
@@ -120,57 +118,60 @@ const Collectors = () => {
       </div>
 
       {/* If collector is found, display details */}
-      {foundCollector && (
-        <div
-          className="mt-8 p-6 rounded-[12px] shadow-[4px_4px_4px_0px_#00000040] bg-white border-[2px] border-[#B0BEC5] w-auto md:w-[520px] 
+      {foundCollectors.length > 0 ? (
+        foundCollectors.map((collector: ICollectorProps) => (
+          <div
+            className="mt-8 p-6 rounded-[12px] shadow-[4px_4px_4px_0px_#00000040] bg-white border-[2px] border-[#B0BEC5] w-auto lg:w-[520px] 
                          flex justify-between gap-4 relative"
-        >
-          <div className="flex gap-6 md:gap-[16px] flex-1 flex-col md:flex-row">
-            <div className="w-[78px] h-[78px]">
-              <img
-                src={foundCollector.imgUrl}
-                alt={foundCollector.name}
-                className="mt-4 mb-4 rounded-full  h-full w-full  object-cover"
-              />
+          >
+            <div className="flex gap-6 md:gap-[16px] flex-1 flex-col md:flex-row">
+              <div className="w-[78px] h-[78px]">
+                <img
+                  src={collector.imgUrl}
+                  alt={collector.name}
+                  className="mt-4 mb-4 rounded-full  h-full w-full  object-cover"
+                />
+              </div>
+              <div className="flex-1 flex flex-col gap-3">
+                <p className="flex items-center justify-between text-xs md:text-[16px] ">
+                  <span>Collector ID</span> {collector.collectorID}
+                </p>
+                <p className="flex items-center justify-between text-xs md:text-[16px] ">
+                  <span>Collector Name</span> {collector.name}
+                </p>
+                <p className="flex items-center justify-between text-xs md:text-[16px] ">
+                  <span>Total Waste Collected</span> {collector.totalWaste} kg
+                </p>
+                <p className="flex items-center justify-between text-xs md:text-[16px] ">
+                  <span>Completed Transactions</span>{" "}
+                  {collector.completedTransactions}
+                </p>
+                <p className="flex items-center justify-between text-xs md:text-[16px] ">
+                  <span>Ratings</span> {collector.ratings}/5
+                </p>
+              </div>
             </div>
-            <div className="flex-1 flex flex-col gap-3">
-              <p className="flex items-center justify-between text-xs md:text-[16px] ">
-                <span>Collector ID</span> {foundCollector.collectorID}
-              </p>
-              <p className="flex items-center justify-between text-xs md:text-[16px] ">
-                <span>Collector Name</span> {foundCollector.name}
-              </p>
-              <p className="flex items-center justify-between text-xs md:text-[16px] ">
-                <span>Total Waste Collected</span> {foundCollector.totalWaste}{" "}
-                kg
-              </p>
-              <p className="flex items-center justify-between text-xs md:text-[16px] ">
-                <span>Completed Transactions</span>{" "}
-                {foundCollector.completedTransactions}
-              </p>
-              <p className="flex items-center justify-between text-xs md:text-[16px] ">
-                <span>Ratings</span> {foundCollector.ratings}/5
-              </p>
+
+            {/* Three dots menu icon */}
+            <div>
+              <IconButton onClick={handleClick} className="!p-0">
+                <Ellipsis />
+              </IconButton>
+
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Edit</MenuItem>
+                <MenuItem onClick={handleClose}>Delete</MenuItem>
+                <MenuItem onClick={handleClose}>View Details</MenuItem>
+              </Menu>
             </div>
           </div>
-
-          {/* Three dots menu icon */}
-          <div>
-            <IconButton onClick={handleClick} className="!p-0">
-              <Ellipsis />
-            </IconButton>
-
-            <Menu
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Edit</MenuItem>
-              <MenuItem onClick={handleClose}>Delete</MenuItem>
-              <MenuItem onClick={handleClose}>View Details</MenuItem>
-            </Menu>
-          </div>
-        </div>
+        ))
+      ) : (
+        <p>No collector found.</p>
       )}
     </div>
   );

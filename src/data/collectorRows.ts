@@ -129,4 +129,17 @@ export const collectorRows = [
     ratings: 4.4,
     imgUrl: "https://via.placeholder.com/150?text=Petyr+Baelish",
   },
+  {
+    id: 11,
+    collectorID: "0011",
+    name: "Stannis Baelish",
+    email: "petyrbaelish@example.com",
+    phoneNumber: "+1234567899",
+    wasteAmount: 22,
+    status: "Active",
+    totalWaste: 130,
+    completedTransactions: 50,
+    ratings: 4.4,
+    imgUrl: "https://via.placeholder.com/150?text=Petyr+Baelish",
+  },
 ];
