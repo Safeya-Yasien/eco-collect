@@ -1,8 +1,10 @@
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
 import Analytics from "@/pages/analytics/Analytics";
 import Collectors from "@/pages/collectors/Collectors";
 import Customers from "@/pages/customers/Customers";
 import Error from "@/pages/error/Error";
+import Login from "@/pages/login/Login";
 import Logout from "@/pages/logout/Logout";
 import Overview from "@/pages/overview/Overview";
 import Settings from "@/pages/settings/Settings";
@@ -12,7 +14,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter(
   [
     {
+      path: "/login",
+      element: <Login />,
+    },
+
+    {
       path: "/",
+      // element: <ProtectedRoute />,
+      // children: [
+      //   {
       element: <MainLayout />,
       errorElement: <Error />,
       children: [
@@ -47,6 +57,8 @@ const router = createBrowserRouter(
       ],
     },
   ],
+  //   },
+  // ],
   {
     future: {
       v7_fetcherPersist: true,
