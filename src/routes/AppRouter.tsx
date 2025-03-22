@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
+// import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
 import Analytics from "@/pages/analytics/Analytics";
 import Collectors from "@/pages/collectors/Collectors";
