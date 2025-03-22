@@ -11,13 +11,12 @@ import { RiCustomerService2Fill } from "react-icons/ri";
 import { ImExit } from "react-icons/im";
 import { IoDocumentText } from "react-icons/io5";
 import { IoIosHelpCircle } from "react-icons/io";
+import { CustomHeading } from "@/components/shared";
 
 const Settings = () => {
   return (
     <div>
-      <h2 className="text-black text-[32px] font-bold capitalize mb-[40px]">
-        settings
-      </h2>
+      <CustomHeading title="settings" />
 
       <div className="w-full md:w-[60%] flex flex-col gap-[22px]">
         {/* user management */}

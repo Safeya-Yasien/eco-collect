@@ -1,12 +1,11 @@
 import tons from "/src/assets/undraw_order_delivered_re_v4ab 1.svg";
 import glass from "/src/assets/Frame 242.svg";
+import { CustomHeading } from "@/components/shared";
 
 const Overview = () => {
   return (
     <div className="">
-      <h2 className="text-black text-[20px] md:text-[32px] font-bold capitalize mb-[40px]">
-        Your Weekly Overview
-      </h2>
+      <CustomHeading title="Your Weekly Overview" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5">
         <div className="flex flex-col items-center justify-center p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">

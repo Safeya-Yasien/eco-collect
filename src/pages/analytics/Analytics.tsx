@@ -1,4 +1,5 @@
 import { BarChartComponent, PieChartComponent } from "@/components";
+import { CustomHeading } from "@/components/shared";
 
 const Analytics = () => {
   const collectedWasteTypesData = [
@@ -91,9 +92,7 @@ const Analytics = () => {
 
   return (
     <div>
-      <h2 className="text-black text-[32px] font-bold capitalize mb-[40px]">
-        analytics
-      </h2>
+      <CustomHeading title="analytics" />
 
       {/* pie charts */}
       <div className="grid grid-cols-1 md:grid-cols-2">

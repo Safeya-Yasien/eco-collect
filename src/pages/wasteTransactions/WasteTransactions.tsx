@@ -5,6 +5,7 @@ import { DataTable } from "@/components";
 import { userRows } from "@/data/userRows";
 
 import "./wasteTransactions.css";
+import { CustomHeading } from "@/components/shared";
 
 const columns: GridColDef<(typeof userRows)[number]>[] = [
   { field: "transactionID", headerName: "Transaction ID", width: 180 },
@@ -68,11 +69,9 @@ const columns: GridColDef<(typeof userRows)[number]>[] = [
 const WasteTransactions = () => {
   return (
     <div>
-      <h2 className="text-black text-[20px] md:text-[32px] font-bold capitalize mb-[40px]">
-      waste transactions
-      </h2>
+      <CustomHeading title="waste transactions" />
 
-      <Box sx={{ minHeight: 500, width: "100%" }} >
+      <Box sx={{ minHeight: 500, width: "100%" }}>
         <DataTable columns={columns} rows={userRows} />
       </Box>
     </div>

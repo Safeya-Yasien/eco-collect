@@ -5,6 +5,7 @@ import { DataTable } from "@/components";
 import { collectorRows } from "@/data/collectorRows";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { Ellipsis } from "lucide-react";
+import { CustomHeading } from "@/components/shared";
 
 // Define a type for the collector data
 interface ICollectorProps {
@@ -75,9 +76,7 @@ const Collectors = () => {
 
   return (
     <div>
-      <h2 className="text-black text-[32px] font-bold capitalize mb-[40px]">
-        Waste Collectors
-      </h2>
+      <CustomHeading title=" Waste Collectors" />
 
       <Box sx={{ height: 350, width: "100%" }}>
         <DataTable

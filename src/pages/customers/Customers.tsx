@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import { Pagination, FreeMode } from "swiper/modules";
 import { customerRows } from "@/data/customerRows";
+import { CustomHeading } from "@/components/shared";
 
 const columns: GridColDef<(typeof customerRows)[number]>[] = [
   { field: "customerID", headerName: "customer ID", width: 200 },
@@ -42,9 +43,7 @@ interface ICustomerProps {
 const Customers = () => {
   return (
     <div>
-      <h2 className="text-black text-[32px] font-bold capitalize mb-[40px]">
-        customers
-      </h2>
+      <CustomHeading title="customers" />
 
       {/* customer carousel */}
       <Swiper
