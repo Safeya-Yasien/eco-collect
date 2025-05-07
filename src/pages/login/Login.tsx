@@ -1,8 +1,40 @@
 import { Link } from "react-router-dom";
-
 import logo from "@assets/ecoCollect.svg";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import actAuthLogin from "@/store/auth/act/actAuthLogin";
+import { useAppDispatch } from "@/store/hooks";
+
+const loginSchema = z.object({
+  email: z
+    .string()
+    .email("Please enter a valid email")
+    .nonempty("Email is required"),
+  password: z.string().nonempty("Password is required"),
+});
+
+type LoginFormInputs = {
+  email: string;
+  password: string;
+};
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = (data: LoginFormInputs) => {
+    console.log("Form data", data);
+    dispatch(actAuthLogin(data));
+  };
+
   return (
     <div className="relative bg-[#f5f5f5] h-screen overflow-hidden">
       {/* logo */}
@@ -32,7 +64,7 @@ const Login = () => {
         <h1 className="text-center text-lg sm:text-[32px] font-bold capitalize mb-16">
           Welcome to EcoCollect!
         </h1>
-        <form className="">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-[22px]">
             {/* email */}
             <div className="flex flex-col gap-[10px]">
@@ -43,12 +75,16 @@ const Login = () => {
                 Email address
               </label>
               <input
+                {...register("email")}
                 type="email"
                 id="email"
                 name="email"
                 placeholder="e.g. example@gmail.com"
                 className="border border-[#2E7D32] rounded-[8px] py-[5px] px-3 h-[48px] outline-none"
               />
+              {errors.email && (
+                <p className="text-red-500">{errors.email.message}</p>
+              )}
             </div>
 
             {/* password */}
@@ -60,33 +96,29 @@ const Login = () => {
                 Password
               </label>
               <input
+                {...register("password")}
                 type="password"
                 id="password"
                 name="password"
                 placeholder="Enter your password..."
                 className="border border-[#2E7D32] rounded-[8px] py-[5px] px-3 h-[48px] outline-none"
               />
+              {errors.password && (
+                <p className="text-red-500">{errors.password.message}</p>
+              )}
               <Link to="/" className="text-xs text-[#2E7D32] text-right">
                 Forgot Password?
               </Link>
             </div>
 
             {/* stay logged in checkbox */}
-            <div className="flex items-center gap-[6px]">
+            <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
-                id="stayLoggedIn"
-                className="w-6 h-6 border-[1px] border-[#2E7D32] rounded-sm bg-white 
-             appearance-none checked:bg-[#2E7D32] checked:border-[#2E7D32] 
-             focus:outline-none focus:ring-0 hover:border-[#2E7D32]"
+                className="accent-[#2E7D32] w-5 h-5 cursor-pointer"
               />
-              <label
-                htmlFor="stayLoggedIn"
-                className="text-[16px] font-normal text-[#1B212F]"
-              >
-                Stay logged in
-              </label>
-            </div>
+              <span className="text-[16px] text-[#1B212F]">Stay logged in</span>
+            </label>
           </div>
 
           {/* login button */}

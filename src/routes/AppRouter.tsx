@@ -1,4 +1,4 @@
-// import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
 import Analytics from "@/pages/analytics/Analytics";
 import Collectors from "@/pages/collectors/Collectors";
@@ -20,45 +20,45 @@ const router = createBrowserRouter(
 
     {
       path: "/",
-      // element: <ProtectedRoute />,
-      // children: [
-      //   {
-      element: <MainLayout />,
-      errorElement: <Error />,
+      element: <ProtectedRoute />,
       children: [
         {
-          index: true,
-          element: <Overview />,
-        },
-        {
-          path: "waste-transactions",
-          element: <WasteTransactions />,
-        },
-        {
-          path: "collectors",
-          element: <Collectors />,
-        },
-        {
-          path: "customers",
-          element: <Customers />,
-        },
-        {
-          path: "analytics",
-          element: <Analytics />,
-        },
-        {
-          path: "settings",
-          element: <Settings />,
-        },
-        {
-          path: "logout",
-          element: <Logout />,
+          element: <MainLayout />,
+          errorElement: <Error />,
+          children: [
+            {
+              index: true,
+              element: <Overview />,
+            },
+            {
+              path: "waste-transactions",
+              element: <WasteTransactions />,
+            },
+            {
+              path: "collectors",
+              element: <Collectors />,
+            },
+            {
+              path: "customers",
+              element: <Customers />,
+            },
+            {
+              path: "analytics",
+              element: <Analytics />,
+            },
+            {
+              path: "settings",
+              element: <Settings />,
+            },
+            {
+              path: "logout",
+              element: <Logout />,
+            },
+          ],
         },
       ],
     },
   ],
-  //   },
-  // ],
   {
     future: {
       v7_fetcherPersist: true,
