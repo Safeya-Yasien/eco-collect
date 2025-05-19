@@ -1,7 +1,9 @@
 import { BarChartComponent, PieChartComponent } from "@/components";
 import { CustomHeading } from "@/components/shared";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Analytics = () => {
+  const isMobile = useIsMobile();
   const collectedWasteTypesData = [
     ["Task", "Collected Waste Types"],
     ["Plastic", 50],
@@ -15,7 +17,7 @@ const Analytics = () => {
     title: "Collected Waste Types",
     titleTextStyle: {
       color: "#000",
-      fontSize: "20",
+      fontSize: isMobile ? 16 : 20,
       fontStyle: "normal",
       fontWeight: "700",
       textTransform: "capitalize",
@@ -25,15 +27,15 @@ const Analytics = () => {
     sliceVisibilityThreshold: 0.02,
 
     chartArea: {
-      left: 50,
-      top: 40,
+      left: isMobile ? "20" : "50",
+      top: "40",
       width: "100%",
-      height: "100%",
+      height: isMobile ? "80%" : "100%",
     },
 
     backgroundColor: "transparent",
     legend: {
-      position: "right",
+      position: isMobile ? "bottom" : "right",
       alignment: "start",
       textStyle: {
         color: "#222222",
@@ -54,7 +56,7 @@ const Analytics = () => {
     title: "Areas With The Most Contributions",
     titleTextStyle: {
       color: "#000",
-      fontSize: "20",
+      fontSize: isMobile ? 16 : 20,
       fontStyle: "normal",
       fontWeight: "700",
       textTransform: "capitalize",
@@ -65,14 +67,14 @@ const Analytics = () => {
 
     backgroundColor: "transparent",
     chartArea: {
-      left: 50,
-      top: 40,
+      left: isMobile ? "20" : "50",
+      top: "40",
       width: "100%",
-      height: "100%",
+      height: isMobile ? "80%" : "100%",
     },
 
     legend: {
-      position: "right",
+      position: isMobile ? "bottom" : "right",
       alignment: "start",
       textStyle: {
         color: "#222222",
@@ -95,7 +97,7 @@ const Analytics = () => {
       <CustomHeading title="analytics" />
 
       {/* pie charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0">
         <PieChartComponent
           data={collectedWasteTypesData}
           options={collectedWasteTypesOptions}
