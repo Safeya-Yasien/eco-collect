@@ -10,15 +10,15 @@ const actGetOrders = createAsyncThunk(
     try {
       const response = await axios.get("/orders");
 
-      const orders = response.data.orders.map((order) => ({
-        transaction_id: order.id,
-        customer_name: order.id,
-        collector_name: order.id,
-        waste_amount: order.id,
-        price: order.id,
-        payment_method: order.id,
-        status: order.id,
-      }));
+      // const orders = response.data.orders.map((order) => ({
+      //   transaction_id: order.id,
+      //   customer_name: order.id,
+      //   collector_name: order.id,
+      //   waste_amount: order.id,
+      //   price: order.id,
+      //   payment_method: order.id,
+      //   status: order.id,
+      // }));
 
       console.log("response", response);
       return response.data;

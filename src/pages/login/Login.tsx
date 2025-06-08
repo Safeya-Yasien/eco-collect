@@ -32,7 +32,7 @@ const Login = () => {
   });
 
   const onSubmit = (data: LoginFormInputs) => {
-    // console.log("Form data", data);
+    console.log("Form data", data);
 
     const fixedCredentials = {
       name: "Admin2 Name",
