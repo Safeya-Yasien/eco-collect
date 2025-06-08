@@ -1,4 +1,3 @@
-// import { Button } from "@mui/material";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 
 type TDataTableProps = {
@@ -8,26 +7,7 @@ type TDataTableProps = {
   showExport?: boolean;
 };
 
-// const CustomToolbar = ({
-//   showFilter,
-//   showExport,
-// }: {
-//   showFilter: boolean;
-//   showExport: boolean;
-// }) => {
-//   return (
-//     <div className="MuiDataGrid-toolbarContainer flex pt-4 pr-4">
-//       {showFilter && <Button className="">Filter</Button>}
-//       {showExport && <Button className="">Export</Button>}
-//     </div>
-//   );
-// };
-const DataTable = ({
-  columns,
-  rows,
-}: // showFilter = true,
-// showExport = true,
-TDataTableProps) => {
+const DataTable = ({ columns, rows }: TDataTableProps) => {
   return (
     <>
       <DataGrid
@@ -41,17 +21,12 @@ TDataTableProps) => {
             },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[1, 5, 10]}
         checkboxSelection
         disableRowSelectionOnClick
         disableDensitySelector
         disableColumnSelector
         slots={{ toolbar: GridToolbar }}
-        // slots={{
-        //   toolbar: () => (
-        //     <CustomToolbar showFilter={showFilter} showExport={showExport} />
-        //   ),
-        // }}
       />
     </>
   );

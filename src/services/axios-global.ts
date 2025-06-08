@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// axios.defaults.baseURL = "http://127.0.0.1:8000/api/admin";
-axios.defaults.baseURL = "https://backend.ecocollect.net/api/";
+axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL;
 
 export default axios;

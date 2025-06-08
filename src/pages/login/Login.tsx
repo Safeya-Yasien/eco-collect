@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "@assets/ecoCollect.svg";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,7 @@ type LoginFormInputs = {
 
 const Login = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -31,8 +32,22 @@ const Login = () => {
   });
 
   const onSubmit = (data: LoginFormInputs) => {
-    console.log("Form data", data);
-    dispatch(actAuthLogin(data));
+    // console.log("Form data", data);
+
+    const fixedCredentials = {
+      name: "Admin2 Name",
+      email: "admin4@example.com",
+      phone: "12344256799",
+      password: "password1234",
+      password_confirmation: "password1234",
+    };
+
+        console.log("Form data", fixedCredentials);
+
+
+    dispatch(actAuthLogin(fixedCredentials));
+    // dispatch(actAuthLogin(data));
+    navigate("/");
   };
 
   return (

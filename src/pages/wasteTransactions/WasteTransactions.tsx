@@ -6,6 +6,9 @@ import { userRows } from "@/data/userRows";
 
 import "./wasteTransactions.css";
 import { CustomHeading } from "@/components/shared";
+// import { useAppDispatch, useAppSelector } from "@/store/hooks";
+// import { useEffect } from "react";
+// import actGetOrders from "@/store/orders/act/actGetOrders";
 
 const columns: GridColDef<(typeof userRows)[number]>[] = [
   { field: "transactionID", headerName: "Transaction ID", width: 180 },
@@ -40,12 +43,6 @@ const columns: GridColDef<(typeof userRows)[number]>[] = [
     editable: true,
   },
   {
-    field: "paymentMethod",
-    headerName: "Payment Method",
-    width: 200,
-    editable: true,
-  },
-  {
     field: "status",
     headerName: "Status",
     width: 120,
@@ -67,6 +64,14 @@ const columns: GridColDef<(typeof userRows)[number]>[] = [
 ];
 
 const WasteTransactions = () => {
+  // const dispatch = useAppDispatch();
+  // const { orders } = useAppSelector((state) => state.orders);
+  // console.log("orders", orders);
+
+  // useEffect(() => {
+  //   dispatch(actGetOrders());
+  // }, [dispatch]);
+
   return (
     <div>
       <CustomHeading title="waste transactions" />

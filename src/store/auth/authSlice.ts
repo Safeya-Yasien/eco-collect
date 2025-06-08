@@ -30,9 +30,9 @@ export const authSlice = createSlice({
     builder.addCase(actAuthLogin.fulfilled, (state) => {
       state.loading = "succeeded";
     });
-    builder.addCase(actAuthLogin.rejected, (state) => {
+    builder.addCase(actAuthLogin.rejected, (state, action) => {
       state.loading = "failed";
-      // state.error = action.payload;
+      state.error = action.payload;
     });
   },
 });

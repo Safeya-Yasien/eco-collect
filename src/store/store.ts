@@ -2,6 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { persistStore, persistReducer } from "redux-persist";
 // import storage from "redux-persist/lib/storage";
 import auth from "./auth/authSlice";
+import orders from "./orders/orderSlice";
+import waste from "./waste/wasteSlice";
+import collectors from "./collectors/collectorsSlice";
+import customers from "./customers/customersSlice";
 
 // const rootPersistConfig = {
 //   key: "root",
@@ -14,6 +18,10 @@ import auth from "./auth/authSlice";
 export const store = configureStore({
   reducer: {
     auth,
+    orders,
+    waste,
+    collectors,
+    customers,
   },
 });
 

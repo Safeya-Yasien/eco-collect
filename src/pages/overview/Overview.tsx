@@ -1,53 +1,56 @@
-import tons from "/src/assets/undraw_order_delivered_re_v4ab 1.svg";
-import glass from "/src/assets/Frame 242.svg";
+import { useEffect } from "react";
+
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+
 import { CustomHeading } from "@/components/shared";
+import { StatCard, WasteTypeCard } from "@/components/stateCards";
+import { actGetWasteTypes } from "@/store/waste/act/actGetWasteTypes";
+import { Skeleton } from "@mui/material";
 
 const Overview = () => {
+  const dispatch = useAppDispatch();
+  const { wasteTypes, loading, error } = useAppSelector((state) => state.waste);
+
+  useEffect(() => {
+    dispatch(actGetWasteTypes());
+  }, [dispatch]);
+
   return (
-    <div className="">
-      <CustomHeading title="Your Weekly Overview" />
+    <>
+      <CustomHeading title="Overview" />
+
+      {loading === "pending" && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5 mb-10">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              className="flex flex-col items-center justify-center p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]"
+              key={i}
+            >
+              <Skeleton className="h-[32px] w-[70%] rounded-sm" />
+              <Skeleton className="w-28 h-28 rounded-md" />
+              <Skeleton className="h-[36px] w-[50%] rounded-sm" />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {error && (
+        <div className="text-center text-red-500" role="alert">
+          {error}
+          <button
+            className="ml-4 px-3 py-1 bg-[#2E7D32] text-white rounded"
+            onClick={() => dispatch(actGetWasteTypes())}
+          >
+            Retry
+          </button>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5">
-        <div className="flex flex-col items-center justify-center p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
-          <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
-            total waste collected
-          </h3>
-          <img src={tons} alt="tons" loading="lazy" />
-          <h3 className="text-[32px] font-bold ">2 Tons</h3>
-          <p className="text-xs md:text-[20px] font-normal ">
-            200kg more than last week
-          </p>
-        </div>
-        <div className="flex flex-col items-center justify-center p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
-          <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
-            total waste collected
-          </h3>
-          <img src={tons} alt="tons" loading="lazy" />
-          <h3 className="text-[32px] font-bold ">2 Tons</h3>
-          <p className="text-xs md:text-[20px] font-normal ">
-            200kg more than last week
-          </p>
-        </div>
-        <div className="flex flex-col items-center justify-center   p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
-          <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
-            total waste collected
-          </h3>
-          <img src={tons} alt="tons" loading="lazy" />
-          <h3 className="text-[32px] font-bold ">2 Tons</h3>
-          <p className="text-xs md:text-[20px] font-normal ">
-            200kg more than last week
-          </p>
-        </div>
-        <div className="flex flex-col items-center justify-center   p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
-          <h3 className="capitalize text-[18px] md:text-[28px] font-normal ">
-            total waste collected
-          </h3>
-          <img src={tons} alt="tons" loading="lazy" />
-          <h3 className="text-[32px] font-bold ">2 Tons</h3>
-          <p className="text-xs md:text-[20px] font-normal ">
-            200kg more than last week
-          </p>
-        </div>
+        {/* state cards */}
+        {Object.entries(wasteTypes).map(([type, amount]) => (
+          <StatCard key={type} type={type} amount={amount} />
+        ))}
       </div>
 
       <h2 className="text-black text-[20px] md:text-[32px] font-bold capitalize mb-[40px] mt-10">
@@ -55,38 +58,21 @@ const Overview = () => {
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-        <div className="flex flex-col justify-center items-center gap-6 w-[213px] p-6 rounded-xl border-[2px] border-[#B0BEC5] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]  bg-white">
-          <h3 className="capitalize text-[24px] font-normal ">plastic </h3>
-          <img src={glass} alt="glass" loading="lazy" />
-          <h3 className="text-[p28x] font-bold ">500 kg</h3>
-          <p className="text-[12px] font-normal ">200kg more than last week </p>
-        </div>
-        <div className="flex flex-col justify-center items-center gap-6 w-[213px] p-6 rounded-xl border-[2px] border-[#B0BEC5] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]  bg-white">
-          <h3 className="capitalize text-[24px] font-normal ">plastic </h3>
-          <img src={glass} alt="glass" loading="lazy" />
-          <h3 className="text-[p28x] font-bold ">500 kg</h3>
-          <p className="text-[12px] font-normal ">200kg more than last week </p>
-        </div>
-        <div className="flex flex-col justify-center items-center gap-6 w-[213px] p-6 rounded-xl border-[2px] border-[#B0BEC5] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]  bg-white">
-          <h3 className="capitalize text-[24px] font-normal ">plastic </h3>
-          <img src={glass} alt="glass" loading="lazy" />
-          <h3 className="text-[p28x] font-bold ">500 kg</h3>
-          <p className="text-[12px] font-normal ">200kg more than last week </p>
-        </div>
-        <div className="flex flex-col justify-center items-center gap-6 w-[213px] p-6 rounded-xl border-[2px] border-[#B0BEC5] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]  bg-white">
-          <h3 className="capitalize text-[24px] font-normal ">plastic </h3>
-          <img src={glass} alt="glass" loading="lazy" />
-          <h3 className="text-[p28x] font-bold ">500 kg</h3>
-          <p className="text-[12px] font-normal ">200kg more than last week </p>
-        </div>
-        <div className="flex flex-col justify-center items-center gap-6 w-[213px] p-6 rounded-xl border-[2px] border-[#B0BEC5] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]  bg-white">
-          <h3 className="capitalize text-[24px] font-normal ">plastic </h3>
-          <img src={glass} alt="glass" loading="lazy" />
-          <h3 className="text-[p28x] font-bold ">500 kg</h3>
-          <p className="text-[12px] font-normal ">200kg more than last week </p>
-        </div>
+        {loading === "pending"
+          ? Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={i}
+                className="flex flex-col justify-center items-center gap-6 w-[213px] p-6 rounded-xl border-[2px] border-[#B0BEC5] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] bg-white"
+              >
+                <Skeleton className="h-[28px] w-[60%] rounded-sm" />
+                <Skeleton className="h-[100px] w-[100px] rounded-md" />
+              </div>
+            ))
+          : Object.entries(wasteTypes).map(([type]) => (
+              <WasteTypeCard key={type} type={type} />
+            ))}
       </div>
-    </div>
+    </>
   );
 };
 export default Overview;

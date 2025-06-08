@@ -7,7 +7,6 @@ import { BiTransferAlt } from "react-icons/bi";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 import { TbPresentationAnalyticsFilled } from "react-icons/tb";
-import { IoMdSettings } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
 
 // Menu items.
@@ -41,11 +40,6 @@ const primaryMenuItems = [
 ];
 
 const userMenuItems = [
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: <IoMdSettings />,
-  },
   {
     title: "Logout",
     url: "/logout",

@@ -8,13 +8,6 @@
 
 .MuiDataGrid-toolbarContainer button {
   color: black;
-
-  /* border: 2px solid #b0bec5;
-  box-shadow: 4px 4px 4px 0px #00000040;
-  border-radius: 4px;
-  width: 136px;
-  height: 44px;
-  padding: 24px 12px; */
 }
 
 .MuiDataGrid-toolbarContainer button:hover {

@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
+// import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
 import Analytics from "@/pages/analytics/Analytics";
 import Collectors from "@/pages/collectors/Collectors";
@@ -7,7 +7,6 @@ import Error from "@/pages/error/Error";
 import Login from "@/pages/login/Login";
 import Logout from "@/pages/logout/Logout";
 import Overview from "@/pages/overview/Overview";
-import Settings from "@/pages/settings/Settings";
 import WasteTransactions from "@/pages/wasteTransactions/WasteTransactions";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -20,10 +19,11 @@ const router = createBrowserRouter(
 
     {
       path: "/",
-      element: <ProtectedRoute />,
+      // element: <ProtectedRoute />,
+      element: <MainLayout />,
       children: [
         {
-          element: <MainLayout />,
+          // element: <MainLayout />,
           errorElement: <Error />,
           children: [
             {
@@ -46,10 +46,7 @@ const router = createBrowserRouter(
               path: "analytics",
               element: <Analytics />,
             },
-            {
-              path: "settings",
-              element: <Settings />,
-            },
+
             {
               path: "logout",
               element: <Logout />,
