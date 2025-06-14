@@ -1,14 +1,21 @@
-// import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import MainLayout from "@/layouts/MainLayout/MainLayout";
-import Analytics from "@/pages/analytics/Analytics";
-import Collectors from "@/pages/collectors/Collectors";
-import Customers from "@/pages/customers/Customers";
-import Error from "@/pages/error/Error";
-import Login from "@/pages/login/Login";
-import Logout from "@/pages/logout/Logout";
-import Overview from "@/pages/overview/Overview";
-import WasteTransactions from "@/pages/wasteTransactions/WasteTransactions";
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// import ProtectedRoute from "@/components/auth/ProtectedRoute";
+
+const MainLayout = lazy(() => import("@/layouts/MainLayout/MainLayout"));
+
+import Error from "@/pages/error/Error";
+const Login = lazy(() => import("@/pages/login/Login"));
+const Logout = lazy(() => import("@/pages/logout/Logout"));
+
+const Overview = lazy(() => import("@/pages/overview/Overview"));
+const Analytics = lazy(() => import("@/pages/analytics/Analytics"));
+const Collectors = lazy(() => import("@/pages/collectors/Collectors"));
+const Customers = lazy(() => import("@/pages/customers/Customers"));
+const WasteTransactions = lazy(
+  () => import("../pages/wasteTransactions/WasteTransactions")
+);
 
 const router = createBrowserRouter(
   [

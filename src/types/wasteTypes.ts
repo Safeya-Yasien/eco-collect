@@ -1,3 +1,6 @@
 export interface IWasteTypes {
-  [key: string]: number;
+  [key: string]: {
+    total_quantity: number;
+    percentage: number;
+  };
 }

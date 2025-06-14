@@ -35,7 +35,6 @@ const Customers = () => {
     dispatch(actGetCustomers());
   }, [dispatch]);
 
-
   return (
     <div>
       <CustomHeading title="customers" />

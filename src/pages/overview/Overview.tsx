@@ -1,57 +1,65 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { CustomHeading } from "@/components/shared";
+import { CardGrid, ErrorBanner } from "@/components/common";
 import { StatCard, WasteTypeCard } from "@/components/stateCards";
+
 import { actGetWasteTypes } from "@/store/waste/act/actGetWasteTypes";
-import { Skeleton } from "@mui/material";
+
+import WasteTypeCardSkeleton from "@/components/stateCards/skeleton/WasteTypeCardSkeleton";
+import StatCardSkeleton from "@/components/stateCards/skeleton/StatCardSkeleton";
 
 const Overview = () => {
   const dispatch = useAppDispatch();
   const { wasteTypes, loading, error } = useAppSelector((state) => state.waste);
 
+  const hasData = Object.keys(wasteTypes).length > 0;
+
+  const stateCards = useMemo(
+    () =>
+      Object.entries(wasteTypes).map(([type, data]) => (
+        <StatCard key={type} type={type} total_quantity={data.total_quantity} />
+      )),
+    [wasteTypes]
+  );
+
+  const wasteTypesCards = useMemo(
+    () =>
+      Object.entries(wasteTypes).map(([type, data]) => (
+        <WasteTypeCard key={type} type={type} percentage={data.percentage} />
+      )),
+    [wasteTypes]
+  );
+
   useEffect(() => {
-    dispatch(actGetWasteTypes());
-  }, [dispatch]);
+    if (!hasData) {
+      dispatch(actGetWasteTypes());
+    }
+  }, [dispatch, hasData, wasteTypes]);
 
   return (
     <>
       <CustomHeading title="Overview" />
 
-      {loading === "pending" && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5 mb-10">
+      {/* state cards */}
+      {loading === "pending" ? (
+        <CardGrid>
           {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              className="flex flex-col items-center justify-center p-6 gap-[38px] rounded-[12px] border-[2px] border-[#B0BEC5] bg-white shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]"
-              key={i}
-            >
-              <Skeleton className="h-[32px] w-[70%] rounded-sm" />
-              <Skeleton className="w-28 h-28 rounded-md" />
-              <Skeleton className="h-[36px] w-[50%] rounded-sm" />
-            </div>
+            <StatCardSkeleton key={i} />
           ))}
-        </div>
+        </CardGrid>
+      ) : (
+        <CardGrid>{stateCards}</CardGrid>
       )}
 
       {error && (
-        <div className="text-center text-red-500" role="alert">
-          {error}
-          <button
-            className="ml-4 px-3 py-1 bg-[#2E7D32] text-white rounded"
-            onClick={() => dispatch(actGetWasteTypes())}
-          >
-            Retry
-          </button>
-        </div>
+        <ErrorBanner
+          error={error}
+          onRetry={() => dispatch(actGetWasteTypes())}
+        />
       )}
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5">
-        {/* state cards */}
-        {Object.entries(wasteTypes).map(([type, amount]) => (
-          <StatCard key={type} type={type} amount={amount} />
-        ))}
-      </div>
 
       <h2 className="text-black text-[20px] md:text-[32px] font-bold capitalize mb-[40px] mt-10">
         types of waste collected
@@ -60,17 +68,9 @@ const Overview = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {loading === "pending"
           ? Array.from({ length: 5 }).map((_, i) => (
-              <div
-                key={i}
-                className="flex flex-col justify-center items-center gap-6 w-[213px] p-6 rounded-xl border-[2px] border-[#B0BEC5] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] bg-white"
-              >
-                <Skeleton className="h-[28px] w-[60%] rounded-sm" />
-                <Skeleton className="h-[100px] w-[100px] rounded-md" />
-              </div>
+              <WasteTypeCardSkeleton key={i} />
             ))
-          : Object.entries(wasteTypes).map(([type]) => (
-              <WasteTypeCard key={type} type={type} />
-            ))}
+          : wasteTypesCards}
       </div>
     </>
   );
