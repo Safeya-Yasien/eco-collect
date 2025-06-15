@@ -4,7 +4,6 @@ import { GridColDef } from "@mui/x-data-grid";
 import { DataTable } from "@/components";
 import { userRows } from "@/data/userRows";
 
-import "./wasteTransactions.css";
 import { CustomHeading } from "@/components/shared";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect } from "react";

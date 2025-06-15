@@ -137,3 +137,28 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+.MuiDataGrid-toolbarContainer {
+  flex-direction: row-reverse;
+}
+
+.MuiDataGrid-toolbarContainer button {
+  color: black;
+}
+
+.MuiDataGrid-toolbarContainer button:hover {
+  background-color: transparent;
+}
+
+.MuiDataGrid-toolbarContainer button:nth-child(2) {
+  order: -1;
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: black;
+  opacity: 50%;
+}
