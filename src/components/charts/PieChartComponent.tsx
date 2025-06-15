@@ -2,7 +2,7 @@ import { Chart } from "react-google-charts";
 
 interface IPieChart {
   data: (number | string)[][];
-  options: any;
+  options: Record<string, unknown>;
 }
 
 const PieChartComponent = ({ data, options }: IPieChart) => {

@@ -1,17 +1,16 @@
-import { BarChartComponent, PieChartComponent } from "@/components";
+import { useEffect, useMemo } from "react";
+
 import { CustomHeading } from "@/components/shared";
+import { BarChartComponent, PieChartComponent } from "@/components";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import actGetMostContributedLocation from "@/store/analytics/act/actGetMostContributedLocation";
+import actGetCollectorsPerformance from "@/store/analytics/act/actGetCollectorsPerformance";
+import { actGetWasteTypes } from "@/store/waste/act/actGetWasteTypes";
 
 const Analytics = () => {
   const isMobile = useIsMobile();
-  const collectedWasteTypesData = [
-    ["Task", "Collected Waste Types"],
-    ["Plastic", 50],
-    ["Paper", 20],
-    ["Glass", 10],
-    ["Carton", 10],
-    ["Organic", 10],
-  ];
 
   const collectedWasteTypesOptions = {
     title: "Collected Waste Types",
@@ -45,13 +44,6 @@ const Analytics = () => {
     colors: ["#3366CC", "#DC3912", "#FF9900", "#109618", "#990099"],
   };
 
-  const mostContributionsData = [
-    ["Task", "Areas With The Most Contributions"],
-    ["Cairo", 47.6],
-    ["Alexandria", 28.6],
-    ["Other", 23.6],
-  ];
-
   const mostContributionsOptions = {
     title: "Areas With The Most Contributions",
     titleTextStyle: {
@@ -84,13 +76,59 @@ const Analytics = () => {
     colors: ["#3366CC", "#DC3912", "#FF9900"],
   };
 
-  // bar char
-  const collectorsPerformanceData = [
-    { name: "1", Deals: 10, Expenses: 90 },
-    { name: "2", Deals: 5, Expenses: 98 },
-    { name: "3", Deals: 15, Expenses: 100 },
-    { name: "4", Deals: 8, Expenses: 90 },
-  ];
+  const dispatch = useAppDispatch();
+  const { mostContributedLocations, collectorsPerformance, loading, error } =
+    useAppSelector((state) => state.analytics);
+
+  const { wasteTypes } = useAppSelector((state) => state.waste);
+
+  useEffect(() => {
+    dispatch(actGetMostContributedLocation());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(actGetCollectorsPerformance());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(actGetWasteTypes());
+  }, [dispatch]);
+
+  // most contributed locations data
+  const mostContributionsData = useMemo(() => {
+    if (
+      Array.isArray(mostContributedLocations) &&
+      mostContributedLocations.length > 0
+    ) {
+      return [
+        ["Task", "Areas With The Most Contributions"],
+        ...mostContributedLocations.map((item) => [
+          item.location_name,
+          item.percentage,
+        ]),
+      ];
+    }
+    return [["Task", "Areas With The Most Contributions"]];
+  }, [mostContributedLocations]);
+
+  // collectors performance data
+  const collectorsPerformanceData = useMemo(() => {
+    return collectorsPerformance;
+  }, [collectorsPerformance]);
+
+  // waste types data
+  const collectedWasteTypesData = useMemo(() => {
+    if (wasteTypes && Object.keys(wasteTypes).length > 0) {
+      return [
+        ["Task", "Collected Waste Types"],
+        ...Object.entries(wasteTypes).map(([key, value]) => [
+          key,
+          value.percentage,
+        ]),
+      ];
+    }
+    return [["Task", "Collected Waste Types"]];
+  }, [wasteTypes]);
 
   return (
     <div>
@@ -113,7 +151,9 @@ const Analytics = () => {
         <h3 className="text-black text-[20px] font-bold">
           Collectors’ Performance
         </h3>
-        <BarChartComponent data={collectorsPerformanceData} />
+        <BarChartComponent
+          collectorsPerformanceData={collectorsPerformanceData}
+        />
       </div>
     </div>
   );

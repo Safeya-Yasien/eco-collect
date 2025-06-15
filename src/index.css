@@ -92,8 +92,8 @@ body {
 }
 
 .recharts-legend-wrapper {
-  right: -100px !important;
-  top: 60px !important;
+  right: -150px !important;
+  top: 55px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-end !important;
@@ -120,7 +120,7 @@ body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
   .recharts-legend-wrapper {
     display: block !important;
     top: auto !important;

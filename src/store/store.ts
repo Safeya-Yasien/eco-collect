@@ -6,6 +6,7 @@ import orders from "./orders/orderSlice";
 import waste from "./waste/wasteSlice";
 import collectors from "./collectors/collectorsSlice";
 import customers from "./customers/customersSlice";
+import analytics from "./analytics/analyticsSlice";
 
 // const rootPersistConfig = {
 //   key: "root",
@@ -22,6 +23,7 @@ export const store = configureStore({
     waste,
     collectors,
     customers,
+    analytics,
   },
 });
 

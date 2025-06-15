@@ -1,16 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { ICollector, TLoading } from "@/types";
-import actGetCollectors from "./act/actGetCollectors";
+import {
+  ICollectorsPerformance,
+  IMostContributedLocations,
+  TLoading,
+} from "@/types";
+import actGetMostContributedLocation from "./act/actGetMostContributedLocation";
+import actGetCollectorsPerformance from "./act/actGetCollectorsPerformance";
 
 interface IAnalyticsState {
-  collectors: ICollector[];
+  mostContributedLocations: IMostContributedLocations[];
+  collectorsPerformance: ICollectorsPerformance[];
   loading: TLoading;
   error: string | null;
 }
 
 const initialState: IAnalyticsState = {
-  collectors: [],
+  mostContributedLocations: [],
+  collectorsPerformance: [],
   loading: "idle",
   error: null,
 };
@@ -20,15 +27,33 @@ export const analyticsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(actGetCollectors.pending, (state) => {
+    // most contributed location
+    builder.addCase(actGetMostContributedLocation.pending, (state) => {
       state.loading = "pending";
       state.error = null;
     });
-    builder.addCase(actGetCollectors.fulfilled, (state, action) => {
-      state.loading = "succeeded";
-      state.collectors = action.payload;
+    builder.addCase(
+      actGetMostContributedLocation.fulfilled,
+      (state, action) => {
+        state.loading = "succeeded";
+        state.mostContributedLocations = action.payload;
+      }
+    );
+    builder.addCase(actGetMostContributedLocation.rejected, (state, action) => {
+      state.loading = "failed";
+      state.error = action.payload as string;
     });
-    builder.addCase(actGetCollectors.rejected, (state, action) => {
+
+    // Collectors Performance
+    builder.addCase(actGetCollectorsPerformance.pending, (state) => {
+      state.loading = "pending";
+      state.error = null;
+    });
+    builder.addCase(actGetCollectorsPerformance.fulfilled, (state, action) => {
+      state.loading = "succeeded";
+      state.collectorsPerformance = action.payload;
+    });
+    builder.addCase(actGetCollectorsPerformance.rejected, (state, action) => {
       state.loading = "failed";
       state.error = action.payload as string;
     });

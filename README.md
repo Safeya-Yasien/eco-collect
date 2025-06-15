@@ -49,5 +49,9 @@ export default tseslint.config({
 });
 ```
 
-- sidebar responsive <br/>
-- text leading in weekly overview<br/>
+- analytics page <br/>
+- login page<br/>
+- lighthouse performance <br/>
+- lighthouse accessibility <br/>
+- lighthouse best practices <br/>
+- enhance code<br/>
