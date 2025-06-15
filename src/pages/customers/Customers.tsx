@@ -41,7 +41,7 @@ const Customers = () => {
 
       {/* data table */}
       <div className="mt-[50px]">
-        <Box sx={{ height: 350, width: "100%" }}>
+        <Box sx={{ height: "100%", width: "100%" }}>
           <DataTable
             columns={columns}
             rows={customers}

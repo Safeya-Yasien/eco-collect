@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "@/services/axios-global";
+import { axiosErrorHandler } from "@/utils";
 
 type TFormData = {
   email: string;
   password: string;
 };
 type TResponse = {
-  accessToken: string;
+  token: string;
 };
 
 const actAuthLogin = createAsyncThunk(
@@ -16,11 +17,9 @@ const actAuthLogin = createAsyncThunk(
 
     try {
       const res = await axios.post<TResponse>("/register", formData);
-      console.log("response data", res);
-      return res.data;
+      return res.data.token;
     } catch (error) {
-      console.log("response error", error);
-      return rejectWithValue("Login failed. Please try again.");
+      return rejectWithValue(axiosErrorHandler(error));
     }
   }
 );

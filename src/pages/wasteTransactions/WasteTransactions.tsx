@@ -6,32 +6,32 @@ import { userRows } from "@/data/userRows";
 
 import "./wasteTransactions.css";
 import { CustomHeading } from "@/components/shared";
-// import { useAppDispatch, useAppSelector } from "@/store/hooks";
-// import { useEffect } from "react";
-// import actGetOrders from "@/store/orders/act/actGetOrders";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useEffect } from "react";
+import actGetOrders from "@/store/orders/act/actGetOrders";
 
 const columns: GridColDef<(typeof userRows)[number]>[] = [
-  { field: "transactionID", headerName: "Transaction ID", width: 180 },
+  { field: "transaction_id", headerName: "Transaction ID", width: 180 },
   {
-    field: "Date",
+    field: "arrival_time",
     headerName: "Date",
     width: 150,
     editable: true,
   },
   {
-    field: "customerName",
+    field: "customer_name",
     headerName: "Customer Name",
     width: 200,
     editable: true,
   },
   {
-    field: "collectorName",
+    field: "collector_name",
     headerName: "Collector Name",
     width: 200,
     editable: true,
   },
   {
-    field: "wasteAmount",
+    field: "waste_amount",
     headerName: "Waste Amount",
     width: 180,
     editable: true,
@@ -64,20 +64,19 @@ const columns: GridColDef<(typeof userRows)[number]>[] = [
 ];
 
 const WasteTransactions = () => {
-  // const dispatch = useAppDispatch();
-  // const { orders } = useAppSelector((state) => state.orders);
-  // console.log("orders", orders);
+  const dispatch = useAppDispatch();
+  const { orders } = useAppSelector((state) => state.orders);
 
-  // useEffect(() => {
-  //   dispatch(actGetOrders());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(actGetOrders());
+  }, [dispatch]);
 
   return (
     <div>
       <CustomHeading title="waste transactions" />
 
       <Box sx={{ minHeight: 500, width: "100%" }}>
-        <DataTable columns={columns} rows={userRows} />
+        <DataTable columns={columns} rows={orders ?? []} />
       </Box>
     </div>
   );

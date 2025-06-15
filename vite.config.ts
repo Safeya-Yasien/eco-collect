@@ -28,6 +28,7 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@types": path.resolve(__dirname, "./src/types"),
       "@services": path.resolve(__dirname, "./src/services"),
+      "@feedback": path.resolve(__dirname, "./src/feedback"),
     },
   },
   server: {

@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import actAuthLogin from "@/store/auth/act/actAuthLogin";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useEffect } from "react";
+import { Spinner } from "@/components/feedback";
 
 const loginSchema = z.object({
   email: z
@@ -22,6 +24,14 @@ type LoginFormInputs = {
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { accessToken, loading } = useAppSelector((state) => state.auth);
+
+  // Redirect if accessToken exists
+  useEffect(() => {
+    if (accessToken) {
+      navigate("/", { replace: true });
+    }
+  }, [accessToken, navigate]);
 
   const {
     register,
@@ -31,9 +41,7 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginFormInputs) => {
-    console.log("Form data", data);
-
+  const onSubmit = async () => {
     const fixedCredentials = {
       name: "Admin2 Name",
       email: "admin4@example.com",
@@ -42,16 +50,15 @@ const Login = () => {
       password_confirmation: "password1234",
     };
 
-        console.log("Form data", fixedCredentials);
-
-
-    dispatch(actAuthLogin(fixedCredentials));
-    // dispatch(actAuthLogin(data));
-    navigate("/");
+    const resultAction = await dispatch(actAuthLogin(fixedCredentials));
+    if (actAuthLogin.fulfilled.match(resultAction)) {
+      navigate("/");
+    }
   };
 
   return (
     <div className="relative bg-[#f5f5f5] h-screen overflow-hidden">
+      {loading === "pending" && <Spinner />}
       {/* logo */}
       <div className="flex items-center justify-center text-center pt-28">
         <img src={logo} alt="ecoCollect" />

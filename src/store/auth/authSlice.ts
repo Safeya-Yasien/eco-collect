@@ -21,14 +21,23 @@ const initialState: TAuthState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logout(state) {
+      state.accessToken = null;
+      state.email = "";
+      state.password = "";
+      state.error = null;
+      state.loading = "idle";
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(actAuthLogin.pending, (state) => {
       state.loading = "pending";
       state.error = null;
     });
-    builder.addCase(actAuthLogin.fulfilled, (state) => {
+    builder.addCase(actAuthLogin.fulfilled, (state, action) => {
       state.loading = "succeeded";
+      state.accessToken = action.payload;
     });
     builder.addCase(actAuthLogin.rejected, (state, action) => {
       state.loading = "failed";
@@ -36,5 +45,7 @@ export const authSlice = createSlice({
     });
   },
 });
+
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

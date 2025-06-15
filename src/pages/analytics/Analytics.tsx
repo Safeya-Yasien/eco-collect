@@ -2,12 +2,13 @@ import { useEffect, useMemo } from "react";
 
 import { CustomHeading } from "@/components/shared";
 import { BarChartComponent, PieChartComponent } from "@/components";
+
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import actGetMostContributedLocation from "@/store/analytics/act/actGetMostContributedLocation";
-import actGetCollectorsPerformance from "@/store/analytics/act/actGetCollectorsPerformance";
 import { actGetWasteTypes } from "@/store/waste/act/actGetWasteTypes";
+import actGetCollectorsPerformance from "@/store/analytics/act/actGetCollectorsPerformance";
+import actGetMostContributedLocation from "@/store/analytics/act/actGetMostContributedLocation";
 
 const Analytics = () => {
   const isMobile = useIsMobile();
@@ -77,48 +78,26 @@ const Analytics = () => {
   };
 
   const dispatch = useAppDispatch();
-  const { mostContributedLocations, collectorsPerformance, loading, error } =
-    useAppSelector((state) => state.analytics);
+  const { mostContributedLocations, collectorsPerformance } = useAppSelector(
+    (state) => state.analytics
+  );
 
   const { wasteTypes } = useAppSelector((state) => state.waste);
 
-  useEffect(() => {
-    dispatch(actGetMostContributedLocation());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(actGetCollectorsPerformance());
-  }, [dispatch]);
+  const hasWasteTypes = wasteTypes && Object.keys(wasteTypes).length > 0;
+  const hasLocations =
+    Array.isArray(mostContributedLocations) &&
+    mostContributedLocations.length > 0;
 
   useEffect(() => {
     dispatch(actGetWasteTypes());
+    dispatch(actGetMostContributedLocation());
+    dispatch(actGetCollectorsPerformance());
   }, [dispatch]);
-
-  // most contributed locations data
-  const mostContributionsData = useMemo(() => {
-    if (
-      Array.isArray(mostContributedLocations) &&
-      mostContributedLocations.length > 0
-    ) {
-      return [
-        ["Task", "Areas With The Most Contributions"],
-        ...mostContributedLocations.map((item) => [
-          item.location_name,
-          item.percentage,
-        ]),
-      ];
-    }
-    return [["Task", "Areas With The Most Contributions"]];
-  }, [mostContributedLocations]);
-
-  // collectors performance data
-  const collectorsPerformanceData = useMemo(() => {
-    return collectorsPerformance;
-  }, [collectorsPerformance]);
 
   // waste types data
   const collectedWasteTypesData = useMemo(() => {
-    if (wasteTypes && Object.keys(wasteTypes).length > 0) {
+    if (hasWasteTypes) {
       return [
         ["Task", "Collected Waste Types"],
         ...Object.entries(wasteTypes).map(([key, value]) => [
@@ -128,7 +107,26 @@ const Analytics = () => {
       ];
     }
     return [["Task", "Collected Waste Types"]];
-  }, [wasteTypes]);
+  }, [wasteTypes, hasWasteTypes]);
+
+  // most contributed locations data
+  const mostContributionsData = useMemo(() => {
+    if (hasLocations) {
+      return [
+        ["Task", "Areas With The Most Contributions"],
+        ...mostContributedLocations.map((item) => [
+          item.location_name,
+          item.percentage,
+        ]),
+      ];
+    }
+    return [["Task", "Areas With The Most Contributions"]];
+  }, [mostContributedLocations, hasLocations]);
+
+  // collectors performance data
+  const collectorsPerformanceData = useMemo(() => {
+    return collectorsPerformance;
+  }, [collectorsPerformance]);
 
   return (
     <div>
@@ -140,6 +138,7 @@ const Analytics = () => {
           data={collectedWasteTypesData}
           options={collectedWasteTypesOptions}
         />
+
         <PieChartComponent
           data={mostContributionsData}
           options={mostContributionsOptions}

@@ -1,8 +1,9 @@
-import { axiosErrorHandler } from "@/utils";
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { axiosErrorHandler } from "@/utils";
+import { IOrder, IRawOrder } from "@/types";
 
-const actGetOrders = createAsyncThunk(
+const actGetOrders = createAsyncThunk<IOrder[], void>(
   "orders/actGetOrders",
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
@@ -10,20 +11,22 @@ const actGetOrders = createAsyncThunk(
     try {
       const response = await axios.get("/orders");
 
-      // const orders = response.data.orders.map((order) => ({
-      //   transaction_id: order.id,
-      //   customer_name: order.id,
-      //   collector_name: order.id,
-      //   waste_amount: order.id,
-      //   price: order.id,
-      //   payment_method: order.id,
-      //   status: order.id,
-      // }));
+      const orders = (response.data.orders as IRawOrder[]).map(
+        (order): IOrder => ({
+          id: order.order_id,
+          transaction_id: order.order_id,
+          arrival_time: order.arrival_time,
+          customer_name: order.user_name,
+          collector_name: order.collector_name,
+          waste_amount: order.quantity,
+          price: order.price_for_kg,
+          payment_method: order.payment_method,
+          status: order.status,
+        })
+      );
 
-      console.log("response", response);
-      return response.data;
+      return orders;
     } catch (error) {
-      console.log("error", error);
       return rejectWithValue(axiosErrorHandler(error));
     }
   }

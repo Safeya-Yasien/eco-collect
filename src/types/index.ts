@@ -7,6 +7,8 @@ import {
   type ICollectorsPerformance,
 } from "./analytics";
 
+import { type IOrder, type IRawOrder } from "./order.types";
+
 export {
   TLoading,
   IWasteTypes,
@@ -14,4 +16,6 @@ export {
   ICustomer,
   IMostContributedLocations,
   ICollectorsPerformance,
+  IOrder,
+  IRawOrder,
 };

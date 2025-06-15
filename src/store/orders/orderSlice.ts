@@ -1,31 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actGetOrders from "./act/actGetOrders";
-import { TLoading } from "@/types";
-
-// interface IOrder {
-//   user_id: number;
-//   collector_id: number;
-//   waste_type_id: number;
-//   quantity: number;
-//   price_for_kg: number;
-//   status: string;
-//   arrival_time: string | null;
-//   points_for_kg: number | null;
-//   created_at: string;
-//   updated_at: string;
-//   location_name: string;
-//   pickup_time: string;
-//   is_converted: boolean;
-// }
-
-// interface IOrdersResponse {
-//   success: boolean;
-//   message: string;
-//   orders: IOrder[];
-// }
+import { IOrder, TLoading } from "@/types";
 
 interface IOrdersState {
-  orders: [] | null;
+  orders: IOrder[];
   loading: TLoading;
   error: string | null;
 }

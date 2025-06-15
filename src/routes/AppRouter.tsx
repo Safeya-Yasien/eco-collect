@@ -1,11 +1,12 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 const MainLayout = lazy(() => import("@/layouts/MainLayout/MainLayout"));
 
 import Error from "@/pages/error/Error";
+import { Spinner } from "@/components/feedback";
 const Login = lazy(() => import("@/pages/login/Login"));
 const Logout = lazy(() => import("@/pages/logout/Logout"));
 
@@ -26,11 +27,10 @@ const router = createBrowserRouter(
 
     {
       path: "/",
-      // element: <ProtectedRoute />,
-      element: <MainLayout />,
+      element: <ProtectedRoute />,
       children: [
         {
-          // element: <MainLayout />,
+          element: <MainLayout />,
           errorElement: <Error />,
           children: [
             {
@@ -64,17 +64,15 @@ const router = createBrowserRouter(
     },
   ],
   {
-    future: {
-      v7_fetcherPersist: true,
-      v7_normalizeFormMethod: true,
-      v7_partialHydration: true,
-      v7_relativeSplatPath: true,
-      v7_skipActionErrorRevalidation: true,
-    },
+    future: {},
   }
 );
 
 const AppRouter = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<Spinner />}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 };
 export default AppRouter;
