@@ -2,11 +2,16 @@ import { isAxiosError } from "axios";
 
 const axiosErrorHandler = (error: unknown) => {
   if (isAxiosError(error)) {
-    return (
-      error.response?.data || error.response?.data.message || error.message
-    );
+    const responseData = error.response?.data;
+    return {
+      message: responseData?.message || "Something went wrong",
+      errors: responseData?.errors || {},
+    };
   } else {
-    return "Something went wrong";
+    return {
+      message: "Something went wrong",
+      errors: {},
+    };
   }
 };
 

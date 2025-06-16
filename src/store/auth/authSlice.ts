@@ -2,11 +2,16 @@ import { TLoading } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 import actAuthLogin from "./act/actAuthLogin";
 
+type AuthError = {
+  message: string;
+  errors?: Record<string, string[]>;
+};
+
 type TAuthState = {
   email: string;
   password: string;
   accessToken: string | null;
-  error: string | null;
+  error: AuthError | null;
   loading: TLoading;
 };
 
@@ -29,6 +34,9 @@ export const authSlice = createSlice({
       state.error = null;
       state.loading = "idle";
     },
+    clearAuthError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(actAuthLogin.pending, (state) => {
@@ -41,11 +49,11 @@ export const authSlice = createSlice({
     });
     builder.addCase(actAuthLogin.rejected, (state, action) => {
       state.loading = "failed";
-      state.error = action.payload as string;
+      state.error = action.payload as AuthError;
     });
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, clearAuthError } = authSlice.actions;
 
 export default authSlice.reducer;

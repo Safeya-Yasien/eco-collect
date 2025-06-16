@@ -7,6 +7,7 @@ import actAuthLogin from "@/store/auth/act/actAuthLogin";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect } from "react";
 import { Spinner } from "@/components/feedback";
+import { clearAuthError } from "@/store/auth/authSlice";
 
 const loginSchema = z.object({
   email: z
@@ -24,7 +25,11 @@ type LoginFormInputs = {
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { accessToken, loading } = useAppSelector((state) => state.auth);
+  const { accessToken, loading, error } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(clearAuthError());
+  }, [dispatch]);
 
   // Redirect if accessToken exists
   useEffect(() => {
@@ -41,17 +46,18 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: LoginFormInputs) => {
     const fixedCredentials = {
       name: "Admin2 Name",
-      email: "admin4@example.com",
+      email: data.email,
+      password: data.password,
       phone: "12344256799",
-      password: "password1234",
       password_confirmation: "password1234",
     };
 
     const resultAction = await dispatch(actAuthLogin(fixedCredentials));
     if (actAuthLogin.fulfilled.match(resultAction)) {
+      dispatch(clearAuthError());
       navigate("/");
     }
   };
@@ -59,6 +65,7 @@ const Login = () => {
   return (
     <div className="relative bg-[#f5f5f5] h-screen overflow-hidden">
       {loading === "pending" && <Spinner />}
+
       {/* logo */}
       <div className="flex items-center justify-center text-center pt-28">
         <img src={logo} alt="ecoCollect" />
@@ -87,6 +94,13 @@ const Login = () => {
           Welcome to EcoCollect!
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Show error if login fails */}
+          {error?.message && (
+            <p className="text-red-600 text-center mb-4 font-medium">
+              {error.message}
+            </p>
+          )}
+
           <div className="flex flex-col gap-[22px]">
             {/* email */}
             <div className="flex flex-col gap-[10px]">
@@ -100,7 +114,6 @@ const Login = () => {
                 {...register("email")}
                 type="email"
                 id="email"
-                name="email"
                 placeholder="e.g. example@gmail.com"
                 className="border border-[#2E7D32] rounded-[8px] py-[5px] px-3 h-[48px] outline-none"
               />
@@ -121,7 +134,6 @@ const Login = () => {
                 {...register("password")}
                 type="password"
                 id="password"
-                name="password"
                 placeholder="Enter your password..."
                 className="border border-[#2E7D32] rounded-[8px] py-[5px] px-3 h-[48px] outline-none"
               />
