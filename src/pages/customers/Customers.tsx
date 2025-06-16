@@ -12,18 +12,16 @@ import actGetCustomers from "@/store/customers/act/actGetCustomers";
 
 const columns: GridColDef<ICustomer>[] = [
   { field: "user_id", headerName: "customer ID", width: 200 },
-  { field: "name", headerName: "Name", width: 150, editable: true },
+  { field: "name", headerName: "Name", width: 150 },
   {
     field: "total_points",
     headerName: "Total Points",
     width: 230,
-    editable: true,
   },
   {
     field: "total_balance",
     headerName: "Total Balance",
     width: 180,
-    editable: true,
   },
 ];
 

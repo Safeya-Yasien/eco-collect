@@ -15,37 +15,32 @@ const columns: GridColDef<(typeof userRows)[number]>[] = [
     field: "arrival_time",
     headerName: "Date",
     width: 150,
-    editable: true,
   },
   {
     field: "customer_name",
     headerName: "Customer Name",
     width: 200,
-    editable: true,
   },
   {
     field: "collector_name",
     headerName: "Collector Name",
     width: 200,
-    editable: true,
   },
   {
     field: "waste_amount",
     headerName: "Waste Amount",
     width: 180,
-    editable: true,
   },
   {
     field: "price",
     headerName: "Price",
     width: 130,
-    editable: true,
   },
   {
     field: "status",
     headerName: "Status",
     width: 120,
-    editable: true,
+
     renderCell: (params) => {
       let statusStyle = {};
       const statusValue = params.value.toLowerCase();
