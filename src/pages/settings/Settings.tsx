@@ -11,14 +11,11 @@ import { RiCustomerService2Fill } from "react-icons/ri";
 import { ImExit } from "react-icons/im";
 import { IoDocumentText } from "react-icons/io5";
 import { IoIosHelpCircle } from "react-icons/io";
-import { CustomHeading } from "@/components/shared";
 
 const Settings = () => {
   return (
     <div>
-      <CustomHeading title="settings" />
-
-      <div className="w-full md:w-[60%] flex flex-col gap-[22px]">
+      <div className="flex flex-col gap-[22px]">
         {/* user management */}
         <div className="">
           <h3 className="text-sm font-bold text-[#2E7D32] mb-[6px]">
@@ -133,12 +130,12 @@ const Settings = () => {
 
           <ul className="flex flex-col rounded-[8px] bg-[#B0BEC5] ">
             <li className="flex py-[5px] px-4 items-center justify-between text-[16px] font-semibold h-[48px] border-b border-b-[#2E7D32]">
-              <div className="flex items-center gap-2">
+              <Link to={"/settings/faq"} className="flex items-center gap-2">
                 <span>
                   <IoIosHelpCircle />
                 </span>
                 Help & FAQ
-              </div>
+              </Link>
             </li>
             <li className="flex py-[5px] px-4 items-center justify-between text-[16px] font-semibold h-[48px] border-b border-b-[#2E7D32]">
               <div className="flex items-center gap-2">
@@ -149,20 +146,20 @@ const Settings = () => {
               </div>
             </li>
             <li className="flex py-[5px] px-4 items-center justify-between text-[16px] font-semibold h-[48px] border-b border-b-[#2E7D32]">
-              <div className="flex items-center gap-2">
+              <Link to={"/settings/terms"} className="flex items-center gap-2">
                 <span>
                   <IoDocumentText />
                 </span>
                 Terms & Conditions{" "}
-              </div>
+              </Link>
             </li>
             <li className="flex py-[5px] px-4 items-center justify-between text-[16px] font-semibold h-[48px]">
-              <div className="flex items-center gap-2">
+              <Link to={"/logout"} className="flex items-center gap-2">
                 <span>
                   <ImExit />
                 </span>
                 Log Out{" "}
-              </div>
+              </Link>
             </li>
           </ul>
         </div>

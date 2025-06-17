@@ -4,9 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 const MainLayout = lazy(() => import("@/layouts/MainLayout/MainLayout"));
+const SettingsLayout = lazy(() => import("@/layouts/SettingsLayout"));
 
 import Error from "@/pages/error/Error";
-import { Spinner } from "@/components/feedback";
+import Settings from "@/pages/settings/Settings";
 const Login = lazy(() => import("@/pages/login/Login"));
 const Logout = lazy(() => import("@/pages/logout/Logout"));
 
@@ -20,6 +21,10 @@ const WasteTransactions = lazy(
 const PointTransactions = lazy(
   () => import("../pages/pointTransactions/PointTransactions")
 );
+const Faq = lazy(() => import("@/pages/settings/Faq"));
+const Terms = lazy(() => import("@/pages/settings/Terms"));
+
+import { Spinner } from "@/components/feedback";
 
 const router = createBrowserRouter(
   [
@@ -61,6 +66,24 @@ const router = createBrowserRouter(
               element: <Analytics />,
             },
 
+            {
+              path: "settings",
+              element: <SettingsLayout />,
+              children: [
+                {
+                  index: true,
+                  element: <Settings />,
+                },
+                {
+                  path: "faq",
+                  element: <Faq />,
+                },
+                {
+                  path: "terms",
+                  element: <Terms />,
+                },
+              ],
+            },
             {
               path: "logout",
               element: <Logout />,
