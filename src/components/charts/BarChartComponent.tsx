@@ -36,18 +36,8 @@ const BarChartComponent = ({
             tick={{ fill: "#222222", fontSize: 13 }}
           />
 
-          {/* Left Y Axis - total_quantity_collected */}
+          {/* Single Left Y Axis */}
           <YAxis
-            yAxisId="left"
-            tick={{ fill: "#444", fontSize: 14 }}
-            axisLine={false}
-            tickLine={false}
-          />
-
-          {/* Right Y Axis - orders_count */}
-          <YAxis
-            yAxisId="right"
-            orientation="right"
             tick={{ fill: "#444", fontSize: 14 }}
             axisLine={false}
             tickLine={false}
@@ -60,16 +50,14 @@ const BarChartComponent = ({
             wrapperStyle={{ color: "#000" }}
           />
 
-          {/* Bars */}
+          {/* Both Bars use the left Y Axis */}
           <Bar
-            yAxisId="left"
             dataKey="total_quantity_collected"
             name="Total Quantity Collected"
             fill="#2E7D32"
             barSize={40}
           />
           <Bar
-            yAxisId="right"
             dataKey="orders_count"
             name="Orders Count"
             fill="#FFEB3B"

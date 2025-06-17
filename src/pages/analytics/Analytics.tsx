@@ -98,15 +98,24 @@ const Analytics = () => {
   // waste types data
   const collectedWasteTypesData = useMemo(() => {
     if (hasWasteTypes) {
-      return [
-        ["Task", "Collected Waste Types"],
-        ...Object.entries(wasteTypes).map(([key, value]) => [
-          key,
-          value.percentage,
-        ]),
-      ];
+      const entries = Object.entries(wasteTypes).map(([key, value]) => [
+        key,
+        value.percentage,
+      ]);
+      const allZero = entries.every(([, value]) => value === 0);
+      if (allZero) {
+        return [
+          ["Task", "Collected Waste Types"],
+          ...entries,
+          ["No Data", 1], // Add dummy slice
+        ];
+      }
+      return [["Task", "Collected Waste Types"], ...entries];
     }
-    return [["Task", "Collected Waste Types"]];
+    return [
+      ["Task", "Collected Waste Types"],
+      ["No Data", 1],
+    ];
   }, [wasteTypes, hasWasteTypes]);
 
   // most contributed locations data

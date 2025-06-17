@@ -1,15 +1,17 @@
+import { useEffect } from "react";
+
 import Box from "@mui/material/Box";
 import { GridColDef } from "@mui/x-data-grid";
 
 import { DataTable } from "@/components";
-import { userRows } from "@/data/userRows";
-
 import { CustomHeading } from "@/components/shared";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useEffect } from "react";
-import actGetOrders from "@/store/orders/act/actGetOrders";
 
-const columns: GridColDef<(typeof userRows)[number]>[] = [
+import actGetOrders from "@/store/orders/act/actGetOrders";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+
+import { IRawOrder } from "@/types";
+
+const columns: GridColDef<IRawOrder[]>[] = [
   { field: "transaction_id", headerName: "Transaction ID", width: 180 },
   {
     field: "arrival_time",

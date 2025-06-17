@@ -1,5 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
+
 import logo from "/src/assets/ecoCollect.svg";
+
 import { cn } from "@/lib/utils";
 
 import { BsFillGridFill } from "react-icons/bs";
@@ -8,6 +10,7 @@ import { BsFillBoxSeamFill } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 import { TbPresentationAnalyticsFilled } from "react-icons/tb";
 import { IoLogOut } from "react-icons/io5";
+import { RiCoinsLine } from "react-icons/ri";
 
 // Menu items.
 const primaryMenuItems = [
@@ -19,8 +22,12 @@ const primaryMenuItems = [
   {
     title: "Waste Transactions",
     url: "waste-transactions",
-
     icon: <BiTransferAlt />,
+  },
+  {
+    title: "Point Transactions",
+    url: "point-transactions",
+    icon: <RiCoinsLine />,
   },
   {
     title: "Collectors",
@@ -39,6 +46,7 @@ const primaryMenuItems = [
   },
 ];
 
+// logout menu item.
 const userMenuItems = [
   {
     title: "Logout",

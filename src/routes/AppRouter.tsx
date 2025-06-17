@@ -17,6 +17,9 @@ const Customers = lazy(() => import("@/pages/customers/Customers"));
 const WasteTransactions = lazy(
   () => import("../pages/wasteTransactions/WasteTransactions")
 );
+const PointTransactions = lazy(
+  () => import("../pages/pointTransactions/PointTransactions")
+);
 
 const router = createBrowserRouter(
   [
@@ -40,6 +43,10 @@ const router = createBrowserRouter(
             {
               path: "waste-transactions",
               element: <WasteTransactions />,
+            },
+            {
+              path: "point-transactions",
+              element: <PointTransactions />,
             },
             {
               path: "collectors",

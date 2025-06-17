@@ -8,6 +8,7 @@ import {
 } from "./analytics";
 
 import { type IOrder, type IRawOrder } from "./order.types";
+import { type IPointTransaction } from "./pointTransactions";
 
 export {
   TLoading,
@@ -18,4 +19,5 @@ export {
   ICollectorsPerformance,
   IOrder,
   IRawOrder,
+  IPointTransaction,
 };

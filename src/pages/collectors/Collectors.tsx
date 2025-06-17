@@ -10,8 +10,8 @@ import { ICollector } from "@/types";
 
 const columns: GridColDef<ICollector[]>[] = [
   { field: "collectorID", headerName: "Collector ID", width: 180 },
-  { field: "name", headerName: "Name", width: 150,  },
-  { field: "email", headerName: "Email", width: 250,  },
+  { field: "name", headerName: "Name", width: 150 },
+  { field: "email", headerName: "Email", width: 250 },
   {
     field: "phoneNumber",
     headerName: "Phone Number",

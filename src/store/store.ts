@@ -7,6 +7,7 @@ import waste from "./waste/wasteSlice";
 import collectors from "./collectors/collectorsSlice";
 import customers from "./customers/customersSlice";
 import analytics from "./analytics/analyticsSlice";
+import pointTransactions from "./pointTransactions/pointTransactionsSlice";
 
 const persistConfig = {
   key: "root",
@@ -21,6 +22,7 @@ export const rootReducer = combineReducers({
   collectors,
   customers,
   analytics,
+  pointTransactions,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
