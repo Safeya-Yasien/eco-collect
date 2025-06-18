@@ -7,7 +7,7 @@ const MainLayout = lazy(() => import("@/layouts/MainLayout/MainLayout"));
 const SettingsLayout = lazy(() => import("@/layouts/SettingsLayout"));
 
 import Error from "@/pages/error/Error";
-import Settings from "@/pages/settings/Settings";
+const Settings = lazy(() => import("@/pages/settings/Settings"));
 const Login = lazy(() => import("@/pages/login/Login"));
 const Logout = lazy(() => import("@/pages/logout/Logout"));
 
