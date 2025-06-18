@@ -18,50 +18,62 @@ interface BarChartComponentProps {
 const BarChartComponent = ({
   collectorsPerformanceData,
 }: BarChartComponentProps) => {
+  const normalizedData = collectorsPerformanceData.map((item) => ({
+    ...item,
+    total_quantity_collected:
+      typeof item.total_quantity_collected === "string"
+        ? parseFloat(item.total_quantity_collected)
+        : item.total_quantity_collected,
+  }));
+
   return (
     <div className="w-full md:w-[70%]">
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
-          data={collectorsPerformanceData}
+          data={normalizedData}
           height={400}
           margin={{ right: 30, left: 20, bottom: 5 }}
           barGap={4}
         >
           <CartesianGrid stroke="#ccc" vertical={false} />
 
-          {/* X Axis */}
           <XAxis
             dataKey="collector_id"
             tickLine={false}
             tick={{ fill: "#222222", fontSize: 13 }}
           />
-
-          {/* Single Left Y Axis */}
           <YAxis
+            yAxisId="left"
             tick={{ fill: "#444", fontSize: 14 }}
             axisLine={false}
             tickLine={false}
           />
-
+          <YAxis
+            yAxisId="right"
+            orientation="right"
+            tick={{ fill: "#444", fontSize: 14 }}
+            axisLine={false}
+            tickLine={false}
+          />
           <Tooltip />
           <Legend
             verticalAlign="top"
             align="right"
             wrapperStyle={{ color: "#000" }}
           />
-
-          {/* Both Bars use the left Y Axis */}
           <Bar
             dataKey="total_quantity_collected"
             name="Total Quantity Collected"
             fill="#2E7D32"
-            barSize={40}
+            barSize={30}
+            yAxisId="left"
           />
           <Bar
             dataKey="orders_count"
             name="Orders Count"
-            fill="#FFEB3B"
-            barSize={30}
+            fill="#FFC107"
+            barSize={20}
+            yAxisId="right"
           />
         </BarChart>
       </ResponsiveContainer>
