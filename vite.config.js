@@ -40,23 +40,15 @@ export default defineConfig({
             output: {
                 manualChunks: function (id) {
                     if (id.includes("node_modules")) {
-                        var module_1 = id.toString().split("node_modules/")[1];
-                        if (module_1.startsWith("@mui/")) {
-                            if (module_1.includes("@mui/icons-material")) {
-                                return "mui-icons";
-                            }
-                            if (module_1.includes("@mui/styles")) {
-                                return "mui-styles";
-                            }
-                            if (module_1.includes("@mui/material")) {
-                                return "mui-material";
-                            }
-                            return "mui-other";
-                        }
-                        return module_1.split("/")[0];
+                        return id
+                            .toString()
+                            .split("node_modules/")[1]
+                            .split("/")[0]
+                            .toString();
                     }
                 },
             },
         },
+        chunkSizeWarningLimit: 1000,
     },
 });

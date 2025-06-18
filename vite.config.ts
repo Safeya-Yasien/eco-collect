@@ -43,23 +43,15 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            const module = id.toString().split("node_modules/")[1];
-            if (module.startsWith("@mui/")) {
-              if (module.includes("@mui/icons-material")) {
-                return "mui-icons";
-              }
-              if (module.includes("@mui/styles")) {
-                return "mui-styles";
-              }
-              if (module.includes("@mui/material")) {
-                return "mui-material";
-              }
-              return "mui-other";
-            }
-            return module.split("/")[0];
+            return id
+              .toString()
+              .split("node_modules/")[1]
+              .split("/")[0]
+              .toString();
           }
         },
       },
     },
+    chunkSizeWarningLimit: 1000,
   },
 });
