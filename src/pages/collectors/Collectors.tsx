@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { GridColDef } from "@mui/x-data-grid";
-import { DataTable } from "@/components";
 
 import { CustomHeading } from "@/components/shared";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import actGetCollectors from "@/store/collectors/act/actGetCollectors";
 import { ICollector } from "@/types";
+
+const DataTable = lazy(() => import("@/components/dataTable/DataTable"));
 
 const columns: GridColDef<ICollector[]>[] = [
   { field: "collectorID", headerName: "Collector ID", width: 180 },

@@ -1,15 +1,16 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import { GridColDef } from "@mui/x-data-grid";
 
-import { DataTable } from "@/components";
 import { CustomHeading } from "@/components/shared";
 
 import actGetOrders from "@/store/orders/act/actGetOrders";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { IRawOrder } from "@/types";
+
+const DataTable = lazy(() => import("@/components/dataTable/DataTable"));
 
 const columns: GridColDef<IRawOrder[]>[] = [
   { field: "transaction_id", headerName: "Transaction ID", width: 180 },

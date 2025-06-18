@@ -9,12 +9,15 @@ import compression from "vite-plugin-compression";
 export default defineConfig({
   plugins: [
     react(),
-    visualizer({
-      emitFile: true,
-      filename: "stats.html",
-    }),
+    visualizer({ emitFile: true, filename: "stats.html" }),
     compression({
       algorithm: "brotliCompress",
+      ext: ".br",
+      verbose: true,
+    }),
+    compression({
+      algorithm: "gzip",
+      ext: ".gz",
     }),
   ],
   resolve: {
@@ -33,5 +36,30 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+  },
+
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            const module = id.toString().split("node_modules/")[1];
+            if (module.startsWith("@mui/")) {
+              if (module.includes("@mui/icons-material")) {
+                return "mui-icons";
+              }
+              if (module.includes("@mui/styles")) {
+                return "mui-styles";
+              }
+              if (module.includes("@mui/material")) {
+                return "mui-material";
+              }
+              return "mui-other";
+            }
+            return module.split("/")[0];
+          }
+        },
+      },
+    },
   },
 });

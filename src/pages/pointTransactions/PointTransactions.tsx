@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import { GridColDef } from "@mui/x-data-grid";
 
-import { DataTable } from "@/components";
 import { CustomHeading } from "@/components/shared";
 
 import { IPointTransaction } from "@/types";
@@ -11,6 +10,8 @@ import { IPointTransaction } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { actGetPointTransactions } from "@/store/pointTransactions/act/actGetPointTransactions";
 import { actUpdatePointTransactionStatus } from "@/store/pointTransactions/act/actUpdatePointTransactionStatus";
+
+const DataTable = lazy(() => import("@/components/dataTable/DataTable"));
 
 const getColumns = (
   handleApprove: (id: number) => void
