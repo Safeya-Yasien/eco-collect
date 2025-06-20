@@ -8,7 +8,7 @@ import { BsFillGridFill } from "react-icons/bs";
 import { BiTransferAlt } from "react-icons/bi";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
-import { TbPresentationAnalyticsFilled } from "react-icons/tb";
+import { TbPresentationAnalyticsFilled, TbWeight } from "react-icons/tb";
 import { IoLogOut } from "react-icons/io5";
 import { RiCoinsLine } from "react-icons/ri";
 import { FaCog } from "react-icons/fa";
@@ -21,6 +21,11 @@ const primaryMenuItems = [
     icon: <BsFillGridFill />,
   },
   {
+    title: "Waste Prices",
+    url: "waste-prices",
+    icon: <TbWeight />,
+  },
+  {
     title: "Waste Transactions",
     url: "waste-transactions",
     icon: <BiTransferAlt />,
@@ -30,6 +35,7 @@ const primaryMenuItems = [
     url: "point-transactions",
     icon: <RiCoinsLine />,
   },
+
   {
     title: "Collectors",
     url: "collectors",

@@ -23,6 +23,7 @@ const PointTransactions = lazy(
 );
 const Faq = lazy(() => import("@/pages/settings/Faq"));
 const Terms = lazy(() => import("@/pages/settings/Terms"));
+const WastePrices = lazy(() => import("@/pages/wastePrices/WastePrices"));
 
 import { Spinner } from "@/components/feedback";
 
@@ -44,6 +45,10 @@ const router = createBrowserRouter(
             {
               index: true,
               element: <Overview />,
+            },
+            {
+              path: "waste-prices",
+              element: <WastePrices />,
             },
             {
               path: "waste-transactions",

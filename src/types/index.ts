@@ -9,6 +9,7 @@ import {
 
 import { type IOrder, type IRawOrder } from "./order.types";
 import { type IPointTransaction } from "./pointTransactions";
+import { type IWastePrice } from "./wastePrice";
 
 export {
   TLoading,
@@ -20,4 +21,5 @@ export {
   IOrder,
   IRawOrder,
   IPointTransaction,
+  IWastePrice,
 };
