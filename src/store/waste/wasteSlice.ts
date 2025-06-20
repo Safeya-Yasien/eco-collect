@@ -57,7 +57,7 @@ const wasteSlice = createSlice({
     });
     builder.addCase(actUpdateWastePrices.fulfilled, (state, action) => {
       state.loading = "succeeded";
-      state.wastePrices = action.payload;
+      state.wastePrices = action.payload.data;
     });
     builder.addCase(actUpdateWastePrices.rejected, (state, action) => {
       state.loading = "failed";
