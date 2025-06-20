@@ -49,9 +49,3 @@ export default tseslint.config({
 });
 ```
 
-- analytics page <br/>
-- login page<br/>
-- lighthouse performance <br/>
-- lighthouse accessibility <br/>
-- lighthouse best practices <br/>
-- enhance code<br/>
