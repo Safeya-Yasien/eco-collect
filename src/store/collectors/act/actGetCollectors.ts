@@ -1,14 +1,14 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { axiosErrorHandler } from "@/utils";
 import { ICollector } from "@/types";
+import { axiosInstance } from "@/services/axios-global";
 
 const actGetCollectors = createAsyncThunk(
   "collectors/actGetCollectors",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/waste-collectors");
+      const response = await axiosInstance.get("/waste-collectors");
       const collectors = response.data.collectors.map(
         (collector: ICollector) => ({
           id: collector.id,

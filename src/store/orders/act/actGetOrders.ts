@@ -1,7 +1,7 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosErrorHandler } from "@/utils";
 import { IOrder, IRawOrder } from "@/types";
+import { axiosInstance } from "@/services/axios-global";
 
 const actGetOrders = createAsyncThunk<IOrder[], void>(
   "orders/actGetOrders",
@@ -9,7 +9,7 @@ const actGetOrders = createAsyncThunk<IOrder[], void>(
     const { rejectWithValue } = thunkAPI;
 
     try {
-      const response = await axios.get("/orders");
+      const response = await axiosInstance.get("/orders");
 
       const orders = (response.data.orders as IRawOrder[]).map(
         (order): IOrder => ({

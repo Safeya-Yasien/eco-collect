@@ -1,6 +1,6 @@
+import { axiosInstance } from "@/services/axios-global";
 import { axiosErrorHandler } from "@/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
 export const actUpdateWastePrices = createAsyncThunk(
   "waste/actUpdateWastePrices",
@@ -9,7 +9,7 @@ export const actUpdateWastePrices = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.post("/waste-types/prices", {
+      const response = await axiosInstance.post("/waste-types/prices", {
         waste_types: [
           {
             id,

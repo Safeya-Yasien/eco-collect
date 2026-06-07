@@ -1,7 +1,7 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { axiosErrorHandler } from "@/utils";
+import { axiosInstance } from "@/services/axios-global";
 
 export const actUpdatePointTransactionStatus = createAsyncThunk(
   "pointTransactions/actUpdatePointTransactionStatus",
@@ -10,7 +10,7 @@ export const actUpdatePointTransactionStatus = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      await axios.patch(`/transactions/${id}/status`, {
+      await axiosInstance.patch(`/transactions/${id}/status`, {
         status,
       });
       return { id, status };
