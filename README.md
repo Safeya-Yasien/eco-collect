@@ -1,5 +1,7 @@
 # React + TypeScript + Vite
 
+A smart recycling platform with an Android app that uses machine learning to identify recyclable materials through image analysis. I built the web-based admin dashboard for managing users, collectors, waste types & prices, and waste transactions — and assisted in developing and integrating the ML model with the backend.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
