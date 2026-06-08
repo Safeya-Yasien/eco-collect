@@ -22,14 +22,14 @@ const actGetOrders = createAsyncThunk<IOrder[], void>(
           price: order.price_for_kg,
           payment_method: order.payment_method,
           status: order.status,
-        })
+        }),
       );
 
       return orders;
     } catch (error) {
       return rejectWithValue(axiosErrorHandler(error));
     }
-  }
+  },
 );
 
 export default actGetOrders;

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import glass from "/src/assets/Frame 242.svg";
 
 const WasteTypeCard = ({
@@ -15,4 +16,4 @@ const WasteTypeCard = ({
     </div>
   );
 };
-export default WasteTypeCard;
+export default memo(WasteTypeCard);

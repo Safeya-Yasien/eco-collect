@@ -4,6 +4,8 @@ import Box from "@mui/material/Box";
 import { GridColDef } from "@mui/x-data-grid";
 
 import { CustomHeading } from "@/components/shared";
+import { ErrorBanner } from "@/components/common";
+import Spinner from "@/components/common/Spinner";
 
 import actGetOrders from "@/store/orders/act/actGetOrders";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -62,7 +64,7 @@ const columns: GridColDef<IRawOrder[]>[] = [
 
 const WasteTransactions = () => {
   const dispatch = useAppDispatch();
-  const { orders } = useAppSelector((state) => state.orders);
+  const { orders, loading, error } = useAppSelector((state) => state.orders);
 
   useEffect(() => {
     dispatch(actGetOrders());
@@ -73,7 +75,19 @@ const WasteTransactions = () => {
       <CustomHeading title="waste transactions" />
 
       <Box sx={{ minHeight: 500, width: "100%" }}>
-        <DataTable columns={columns} rows={orders ?? []} />
+        {loading === "pending" ? (
+          <div className="p-8">
+            <Spinner />
+          </div>
+        ) : error ? (
+          <ErrorBanner error={error} onRetry={() => dispatch(actGetOrders())} />
+        ) : (orders ?? []).length === 0 ? (
+          <div className="p-8 text-center text-gray-500">
+            No transactions available.
+          </div>
+        ) : (
+          <DataTable columns={columns} rows={orders ?? []} />
+        )}
       </Box>
     </div>
   );

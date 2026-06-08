@@ -1,8 +1,9 @@
+import React, { memo } from "react";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 
 type TDataTableProps = {
   columns: GridColDef[];
-  rows: object[];
+  rows: any[];
   showFilter?: boolean;
   showExport?: boolean;
 };
@@ -31,4 +32,4 @@ const DataTable = ({ columns, rows }: TDataTableProps) => {
     </>
   );
 };
-export default DataTable;
+export default memo(DataTable);

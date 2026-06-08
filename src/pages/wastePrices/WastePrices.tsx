@@ -1,4 +1,4 @@
-import { lazy, useEffect, useState } from "react";
+import { lazy, useEffect, useState, useCallback, useMemo } from "react";
 
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
@@ -12,6 +12,9 @@ import { GridColDef } from "@mui/x-data-grid";
 import { CustomHeading } from "@/components/shared";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { ErrorBanner } from "@/components/common";
+import Spinner from "@/components/common/Spinner";
+import { useToast } from "@/components/ui/Toast";
 
 import { actGetWastePrices } from "@/store/waste/act/actGetWastePrices";
 import { IWastePrice } from "@/types";
@@ -21,7 +24,10 @@ const DataTable = lazy(() => import("@/components/dataTable/DataTable"));
 
 const WastePrices = () => {
   const dispatch = useAppDispatch();
-  const wastePrices = useAppSelector((state) => state.waste.wastePrices);
+  const { wastePrices, loading, error } = useAppSelector(
+    (state) => state.waste,
+  );
+  const { showToast } = useToast();
 
   // State for dialog
   const [open, setOpen] = useState(false);
@@ -37,24 +43,34 @@ const WastePrices = () => {
     setOpen(true);
   };
 
-  const handleCloseDialog = () => {
+  const handleOpen = useCallback((id: number) => {
+    setSelectedId(id);
+    setOpen(true);
+  }, []);
+
+  const handleCloseDialog = useCallback(() => {
     setOpen(false);
     setSelectedId(null);
     setNewPrice("");
-  };
+  }, []);
 
-  const handleSavePrice = async () => {
+  const handleSavePrice = useCallback(async () => {
     if (selectedId && newPrice) {
-      await dispatch(
-        actUpdateWastePrices({ id: selectedId, price_per_kg: newPrice })
+      const result = await dispatch(
+        actUpdateWastePrices({ id: selectedId, price_per_kg: newPrice }),
       );
+      if ((result as any)?.meta?.requestStatus === "fulfilled") {
+        showToast("Price updated", "success");
+      } else {
+        showToast("Failed to update price", "error");
+      }
       dispatch(actGetWastePrices());
       handleCloseDialog();
     }
-  };
+  }, [dispatch, selectedId, newPrice, handleCloseDialog, showToast]);
 
   const getColumns = (
-    handleChangePrice: (id: number) => void
+    handleChangePrice: (id: number) => void,
   ): GridColDef<IWastePrice>[] => [
     { field: "id", headerName: "ID", width: 100 },
     {
@@ -82,15 +98,29 @@ const WastePrices = () => {
     },
   ];
 
+  const columnsMemo = useMemo(() => getColumns(handleOpen), [handleOpen]);
+
   return (
     <div>
       <CustomHeading title="waste prices" />
 
       <Box sx={{ minHeight: 500, width: "100%" }}>
-        <DataTable
-          columns={getColumns(handleOpenDialog)}
-          rows={wastePrices ?? []}
-        />
+        {loading === "pending" ? (
+          <div className="p-8">
+            <Spinner />
+          </div>
+        ) : error ? (
+          <ErrorBanner
+            error={error}
+            onRetry={() => dispatch(actGetWastePrices())}
+          />
+        ) : (wastePrices ?? []).length === 0 ? (
+          <div className="p-8 text-center text-gray-500">
+            No waste prices available.
+          </div>
+        ) : (
+          <DataTable columns={columnsMemo} rows={wastePrices ?? []} />
+        )}
       </Box>
 
       <Dialog open={open} onClose={handleCloseDialog}>

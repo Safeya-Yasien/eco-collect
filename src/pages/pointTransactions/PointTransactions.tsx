@@ -1,4 +1,4 @@
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, useMemo, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 import { GridColDef } from "@mui/x-data-grid";
@@ -8,13 +8,16 @@ import { CustomHeading } from "@/components/shared";
 import { IPointTransaction } from "@/types";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { ErrorBanner } from "@/components/common";
+import Spinner from "@/components/common/Spinner";
+import { useToast } from "@/components/ui/Toast";
 import { actGetPointTransactions } from "@/store/pointTransactions/act/actGetPointTransactions";
 import { actUpdatePointTransactionStatus } from "@/store/pointTransactions/act/actUpdatePointTransactionStatus";
 
 const DataTable = lazy(() => import("@/components/dataTable/DataTable"));
 
 const getColumns = (
-  handleApprove: (id: number) => void
+  handleApprove: (id: number) => void,
 ): GridColDef<IPointTransaction>[] => [
   { field: "id", headerName: "Transaction ID", width: 180 },
   { field: "date", headerName: "Date", width: 180 },
@@ -60,28 +63,62 @@ const getColumns = (
 
 const PointTransactions = () => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((state) => state.pointTransactions);
+  const { data, loading, error } = useAppSelector(
+    (state) => state.pointTransactions,
+  );
+  const { showToast } = useToast();
 
   useEffect(() => {
     dispatch(actGetPointTransactions());
   }, [dispatch]);
 
-  const rows = (data ?? []).map((row) => ({
-    ...row,
-    user_name: row.user?.name || "—",
-  }));
+  const rows = useMemo(
+    () =>
+      (data ?? []).map((row) => ({
+        ...row,
+        user_name: row.user?.name || "—",
+      })),
+    [data],
+  );
 
-  const handleApprove = async (id: number) => {
-    await dispatch(actUpdatePointTransactionStatus({ id, status: "done" }));
-    dispatch(actGetPointTransactions());
-  };
+  const handleApprove = useCallback(
+    async (id: number) => {
+      const result = await dispatch(
+        actUpdatePointTransactionStatus({ id, status: "done" }),
+      );
+      if (actUpdatePointTransactionStatus.fulfilled.match(result)) {
+        showToast("Transaction approved", "success");
+      } else {
+        showToast("Failed to approve transaction", "error");
+      }
+      dispatch(actGetPointTransactions());
+    },
+    [dispatch, showToast],
+  );
+
+  const columnsMemo = useMemo(() => getColumns(handleApprove), [handleApprove]);
 
   return (
     <div>
       <CustomHeading title="Point Transactions" />
 
       <Box sx={{ minHeight: 500, width: "100%" }}>
-        <DataTable columns={getColumns(handleApprove)} rows={rows} />
+        {loading === "pending" ? (
+          <div className="p-8">
+            <Spinner />
+          </div>
+        ) : error ? (
+          <ErrorBanner
+            error={error}
+            onRetry={() => dispatch(actGetPointTransactions())}
+          />
+        ) : rows.length === 0 ? (
+          <div className="p-8 text-center text-gray-500">
+            No point transactions found.
+          </div>
+        ) : (
+          <DataTable columns={columnsMemo} rows={rows} />
+        )}
       </Box>
     </div>
   );

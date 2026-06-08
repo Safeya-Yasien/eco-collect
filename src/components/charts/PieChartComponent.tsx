@@ -1,3 +1,4 @@
+import React, { memo } from "react";
 import { Chart } from "react-google-charts";
 
 interface IPieChart {
@@ -18,4 +19,4 @@ const PieChartComponent = ({ data, options }: IPieChart) => {
     </div>
   );
 };
-export default PieChartComponent;
+export default memo(PieChartComponent);
