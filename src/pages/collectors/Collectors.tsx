@@ -6,6 +6,8 @@ import { CustomHeading } from "@/components/shared";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import actGetCollectors from "@/store/collectors/act/actGetCollectors";
 import { ICollector } from "@/types";
+import { ErrorBanner, EmptyState } from "@/components/common";
+import { LoadingTable } from "@/components/feedback";
 
 const DataTable = lazy(() => import("@/components/dataTable/DataTable"));
 
@@ -22,7 +24,9 @@ const columns: GridColDef<ICollector[]>[] = [
 
 const Collectors = () => {
   const dispatch = useAppDispatch();
-  const { collectors } = useAppSelector((state) => state.collectors);
+  const { collectors, loading, error } = useAppSelector(
+    (state) => state.collectors,
+  );
 
   useEffect(() => {
     dispatch(actGetCollectors());
@@ -32,13 +36,24 @@ const Collectors = () => {
     <div>
       <CustomHeading title="Waste Collectors" />
 
-      <Box sx={{ height: "100%", width: "100%" }}>
-        <DataTable
-          columns={columns}
-          rows={collectors}
-          showExport={false}
-          showFilter={false}
-        />
+      <Box sx={{ minHeight: 500, width: "100%" }}>
+        {loading === "pending" ? (
+          <LoadingTable />
+        ) : error ? (
+          <ErrorBanner
+            error={error}
+            onRetry={() => dispatch(actGetCollectors())}
+          />
+        ) : collectors.length === 0 ? (
+          <EmptyState message="No collectors found." />
+        ) : (
+          <DataTable
+            columns={columns}
+            rows={collectors}
+            showExport={false}
+            showFilter={false}
+          />
+        )}
       </Box>
     </div>
   );

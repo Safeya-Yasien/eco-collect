@@ -8,6 +8,8 @@ import { CustomHeading } from "@/components/shared";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import actGetCustomers from "@/store/customers/act/actGetCustomers";
+import { ErrorBanner, EmptyState } from "@/components/common";
+import { LoadingTable } from "@/components/feedback";
 
 const DataTable = lazy(() => import("@/components/dataTable/DataTable"));
 
@@ -28,7 +30,9 @@ const columns: GridColDef<ICustomer>[] = [
 
 const Customers = () => {
   const dispatch = useAppDispatch();
-  const { customers } = useAppSelector((state) => state.customers);
+  const { customers, loading, error } = useAppSelector(
+    (state) => state.customers,
+  );
 
   useEffect(() => {
     dispatch(actGetCustomers());
@@ -40,13 +44,24 @@ const Customers = () => {
 
       {/* data table */}
       <div className="mt-[50px]">
-        <Box sx={{ height: "100%", width: "100%" }}>
-          <DataTable
-            columns={columns}
-            rows={customers}
-            showExport={false}
-            showFilter={false}
-          />
+        <Box sx={{ minHeight: 500, width: "100%" }}>
+          {loading === "pending" ? (
+            <LoadingTable />
+          ) : error ? (
+            <ErrorBanner
+              error={error}
+              onRetry={() => dispatch(actGetCustomers())}
+            />
+          ) : customers.length === 0 ? (
+            <EmptyState message="No customers found." />
+          ) : (
+            <DataTable
+              columns={columns}
+              rows={customers}
+              showExport={false}
+              showFilter={false}
+            />
+          )}
         </Box>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+﻿import { useEffect, useMemo } from "react";
 
 import { CustomHeading } from "@/components/shared";
 import { BarChartComponent, PieChartComponent } from "@/components";
@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { actGetWasteTypes } from "@/store/waste/act/actGetWasteTypes";
 import actGetCollectorsPerformance from "@/store/analytics/act/actGetCollectorsPerformance";
 import actGetMostContributedLocation from "@/store/analytics/act/actGetMostContributedLocation";
+import { ErrorBanner } from "@/components/common";
+import { SkeletonChart } from "@/components/feedback";
 
 const Analytics = () => {
   const isMobile = useIsMobile();
@@ -78,9 +80,8 @@ const Analytics = () => {
   };
 
   const dispatch = useAppDispatch();
-  const { mostContributedLocations, collectorsPerformance } = useAppSelector(
-    (state) => state.analytics
-  );
+  const { mostContributedLocations, collectorsPerformance, loading, error } =
+    useAppSelector((state) => state.analytics);
 
   const { wasteTypes } = useAppSelector((state) => state.waste);
 
@@ -141,27 +142,51 @@ const Analytics = () => {
     <div>
       <CustomHeading title="analytics" />
 
-      {/* pie charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0">
-        <PieChartComponent
-          data={collectedWasteTypesData}
-          options={collectedWasteTypesOptions}
+      {error && (
+        <ErrorBanner
+          error={error}
+          onRetry={() => {
+            dispatch(actGetWasteTypes());
+            dispatch(actGetMostContributedLocation());
+            dispatch(actGetCollectorsPerformance());
+          }}
         />
+      )}
 
-        <PieChartComponent
-          data={mostContributionsData}
-          options={mostContributionsOptions}
-        />
+      {/* pie charts */}
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-0">
+        {loading === "pending" ? (
+          <>
+            <SkeletonChart />
+            <SkeletonChart />
+          </>
+        ) : (
+          <>
+            <PieChartComponent
+              data={collectedWasteTypesData}
+              options={collectedWasteTypesOptions}
+            />
+
+            <PieChartComponent
+              data={mostContributionsData}
+              options={mostContributionsOptions}
+            />
+          </>
+        )}
       </div>
 
       {/* Bar Chart - Centered & Reduced Width */}
-      <div className="w-full flex flex-col items-center mt-24">
+      <div className="flex flex-col items-center w-full mt-24">
         <h3 className="text-black text-[20px] font-bold">
-          Collectors’ Performance
+          Collectors' Performance
         </h3>
-        <BarChartComponent
-          collectorsPerformanceData={collectorsPerformanceData}
-        />
+        {loading === "pending" ? (
+          <SkeletonChart />
+        ) : (
+          <BarChartComponent
+            collectorsPerformanceData={collectorsPerformanceData}
+          />
+        )}
       </div>
     </div>
   );

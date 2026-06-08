@@ -38,11 +38,6 @@ const WastePrices = () => {
     dispatch(actGetWastePrices());
   }, [dispatch]);
 
-  const handleOpenDialog = (id: number) => {
-    setSelectedId(id);
-    setOpen(true);
-  };
-
   const handleOpen = useCallback((id: number) => {
     setSelectedId(id);
     setOpen(true);

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 
 type TDataTableProps = {

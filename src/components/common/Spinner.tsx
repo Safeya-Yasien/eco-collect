@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 
 const Spinner = () => (
   <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-60 z-50">
