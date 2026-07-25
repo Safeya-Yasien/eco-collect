@@ -1,9 +1,3 @@
-
-
-
-
-
-
 # Eco-Collect
 
 Eco-Collect is a smart waste management and recycling platform designed to connect users, collectors, and administrators in a simple and efficient way. The system helps users manage waste disposal and collection requests while giving collectors and admins a clear view of operations, pricing, notifications, and performance.
@@ -79,7 +73,7 @@ We are five members working together on this project:
   ](https://github.com/user-attachments/assets/9639c864-64c4-46c0-982f-3862aaac81f1)
 - Buyer Mobile App: https://github.com/user-attachments/assets/0f8ce2a3-cd9f-4131-b249-58795fad8346
 
-- Admin Dashboard: https://github.com/Safeya-Yasien/eco-collect/admin.mp4
+- Admin Dashboard: https://github.com/user-attachments/assets/5395b632-7a59-4f70-b9ab-8ff5c1e36ae1
 
 ## Live Demo
 
