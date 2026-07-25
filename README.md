@@ -1,16 +1,107 @@
 # Eco-Collect
 
+Eco-Collect is a smart waste management and recycling platform designed to connect users, collectors, and administrators in a simple and efficient way. The system helps users manage waste disposal and collection requests while giving collectors and admins a clear view of operations, pricing, notifications, and performance.
 
-# Demo Videos
+This project was developed as a graduation project by a team of five members, combining web development, backend services, mobile app development, AI integration, and UI/UX design.
 
-## Seller Mobile App
-https://github.com/Safeya-Yasien/eco-collect/seller-app.mp4
+## Project Overview
 
-## Buyer Mobile App
-https://github.com/Safeya-Yasien/eco-collect/user-app.mp4
+Eco-Collect aims to make waste collection more organized, transparent, and user-friendly. The platform supports:
 
-## Admin Dashboard
-https://github.com/Safeya-Yasien/eco-collect/admin.mp4
+- User-friendly waste collection and recycling workflows
+- Collector management and pricing control
+- Admin dashboard for monitoring and analytics
+- Mobile-friendly experience for users and collectors
+- AI-assisted features and modern interface design
 
+## Key Features
 
-https://eco-collect-ruby.vercel.app/login
+- Authentication for users, collectors, and admins
+- Waste type and pricing management
+- Order and pickup tracking
+- Notifications and wallet-related operations
+- Admin analytics and dashboard insights
+- Responsive web dashboard
+- Mobile app support for Android
+
+## Tech Stack
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Redux Toolkit
+- React Router
+
+### Backend
+
+- Laravel PHP
+- PHP laravel
+- Authentication and authorization
+- Database-driven business logic
+
+### Mobile
+
+- Android development with Kotlin and Java
+
+### Design
+
+- Figma for UI/UX design
+
+## Team Members
+
+We are five members working together on this project:
+
+- Reham Ahmed Sayed Abdelwahed — UI/UX designer responsible for the visual design and wireframes in Figma
+- Ahmed Mohamed Abdel Azim — Android developer working on Kotlin and Java mobile development
+- Safeya Mohamed Mohamed — Frontend developer focused on the dashboard and AI-related integration
+- Gehad Mohammed Korany Mohammed — Backend developer responsible for server-side logic and APIs
+- Sameh Esmael Nady — Android developer working on Kotlin, AI integration, and collaboration with the mobile team
+
+## Project Structure
+
+- front/ — React-based admin dashboard and web interface
+- backend/ — Laravel backend APIs and application logic
+- public/ — static assets and uploaded files
+- README.md — project documentation
+
+## Demo Videos
+
+- Seller Mobile App: [https://github.com/Safeya-Yasien/eco-collect/seller-app.mp4
+  ](https://github.com/user-attachments/assets/9639c864-64c4-46c0-982f-3862aaac81f1)
+- Buyer Mobile App: https://github.com/user-attachments/assets/0f8ce2a3-cd9f-4131-b249-58795fad8346
+
+- Admin Dashboard: https://github.com/Safeya-Yasien/eco-collect/admin.mp4
+
+## Live Demo
+
+- Admin Dashboard: https://eco-collect-ruby.vercel.app/login
+
+## Getting Started
+
+### Frontend
+
+```bash
+cd front
+npm install
+npm run dev
+```
+
+### Backend
+
+```bash
+cd backend
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+> Make sure your database configuration is set correctly in the backend environment file before running migrations.
+
+## Conclusion
+
+Eco-Collect brings together modern web, backend, mobile, and AI technologies to create a practical and scalable solution for waste collection and recycling management.
