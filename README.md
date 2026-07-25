@@ -12,7 +12,11 @@ Eco-Collect aims to make waste collection more organized, transparent, and user-
 - Collector management and pricing control
 - Admin dashboard for monitoring and analytics
 - Mobile-friendly experience for users and collectors
-- AI-assisted features and modern interface design
+- AI-assisted features and modern interface des
+
+https://github.com/user-attachments/assets/2c098468-1793-4ccc-8e17-4b11f7907959
+
+ign
 
 ## Key Features
 
@@ -69,15 +73,20 @@ We are five members working together on this project:
 
 ## Demo Videos
 
-- Seller Mobile App: [https://github.com/Safeya-Yasien/eco-collect/seller-app.mp4
-  ](https://github.com/user-attachments/assets/9639c864-64c4-46c0-982f-3862aaac81f1)
-- Buyer Mobile App: https://github.com/user-attachments/assets/0f8ce2a3-cd9f-4131-b249-58795fad8346
-
+- Seller Mobile App: https://github.com/user-attachments/assets/5d7c1b45-7798-4d08-a5ba-96160348b098
+- Buyer Mobile App: [https://github.com/user-attachments/assets/0f8ce2a3-cd9f-4131-b249-58795fad8346
+](https://github.com/user-attachments/assets/0b7e15f6-f944-4a03-a230-fd92c575416e)
 - Admin Dashboard: https://github.com/user-attachments/assets/5395b632-7a59-4f70-b9ab-8ff5c1e36ae1
 
 ## Live Demo
 
-- Admin Dashboard: https://eco-collect-ruby.vercel.app/login
+- Admin Dashboard: 
+
+
+
+
+
+
 
 ## Getting Started
 
