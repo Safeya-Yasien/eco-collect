@@ -69,11 +69,11 @@ We are five members working together on this project:
 
 ## Demo Videos
 
-### Seller Mobile App
+### Buyer Mobile App
 
 https://github.com/user-attachments/assets/5d7c1b45-7798-4d08-a5ba-96160348b098
 
-### Buyer Mobile App
+### Seller Mobile App
 
 https://github.com/user-attachments/assets/0b7e15f6-f944-4a03-a230-fd92c575416e
 
