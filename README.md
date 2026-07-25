@@ -1,3 +1,9 @@
+
+
+
+
+
+
 # Eco-Collect
 
 Eco-Collect is a smart waste management and recycling platform designed to connect users, collectors, and administrators in a simple and efficient way. The system helps users manage waste disposal and collection requests while giving collectors and admins a clear view of operations, pricing, notifications, and performance.
