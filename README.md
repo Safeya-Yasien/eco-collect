@@ -83,7 +83,8 @@ https://github.com/user-attachments/assets/2c098468-1793-4ccc-8e17-4b11f7907959
 
 ## Live Demo
 
-- Admin Dashboard: https://eco-collect-ruby.vercel.app/login
+- Admin Dashboard (Primary): [Vercel](https://eco-collect-ruby.vercel.app)
+- Backup Deployment: [Netlify](https://eco-collect.netlify.app/)
 
 ## Getting Started
 
