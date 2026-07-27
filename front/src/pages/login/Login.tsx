@@ -38,12 +38,20 @@ const Login = () => {
     }
   }, [accessToken, navigate]);
 
+  const isMockMode = import.meta.env.VITE_ENABLE_MOCKS === "true";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema),
+    defaultValues: isMockMode
+      ? {
+          email: "demo@ecocollect.com",
+          password: "demo1234",
+        }
+      : undefined,
   });
 
   const onSubmit = async (data: LoginFormInputs) => {
@@ -72,7 +80,7 @@ const Login = () => {
       </div>
 
       {/* wave */}
-      <div className="absolute inset-0 top-32 w-full h-full">
+      <div className="absolute inset-0 w-full h-full top-32">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="1440"
@@ -93,10 +101,19 @@ const Login = () => {
         <h1 className="text-center text-lg sm:text-[32px] font-bold capitalize mb-16">
           Welcome to EcoCollect!
         </h1>
+        {isMockMode && (
+          <div className="mb-6 mx-auto max-w-[320px] bg-[#E8F5E9] border border-[#2E7D32] rounded-[8px] px-4 py-3 text-center">
+            <p className="text-sm font-semibold text-[#2E7D32]">🔑 Demo Mode</p>
+            <p className="text-xs text-[#1B212F] mt-1">
+              Credentials are pre-filled — just click "Log in" to explore the
+              dashboard
+            </p>
+          </div>
+        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Show error if login fails */}
           {error?.message && (
-            <p className="text-red-600 text-center mb-4 font-medium">
+            <p className="mb-4 font-medium text-center text-red-600">
               {error.message}
             </p>
           )}
