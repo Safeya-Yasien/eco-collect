@@ -86,13 +86,6 @@ https://github.com/user-attachments/assets/2c098468-1793-4ccc-8e17-4b11f7907959
 - Admin Dashboard (Primary): [Vercel](https://eco-collect-ruby.vercel.app)
 - Backup Deployment: [Netlify](https://eco-collect.netlify.app/)
 
-## Admin Dashboard Credentials
-
-For testing/development purposes, use the following admin credentials:
-
-- **Email**: admin3@example.com
-- **Password**: password1234
-
 ## Getting Started
 
 ### Frontend
