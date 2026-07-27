@@ -4,6 +4,13 @@ A smart recycling platform with an Android app that uses machine learning to ide
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## Admin Dashboard Credentials
+
+For testing/development purposes, use the following admin credentials:
+
+- **Email**: admin3@example.com
+- **Password**: password1234
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
