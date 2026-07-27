@@ -5,10 +5,20 @@ import AppRouter from "./routes/AppRouter";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <AppRouter />
-    </Provider>
-  </StrictMode>
-);
+async function enableMocking() {
+  if (import.meta.env.VITE_ENABLE_MOCKS !== "true") return;
+  const { worker } = await import("./mocks/browser");
+  return worker.start({
+    onUnhandledRequest: "bypass",
+  });
+}
+
+enableMocking().then(() => {
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
+    </StrictMode>,
+  );
+});
