@@ -22,7 +22,7 @@ const Overview = () => {
       Object.entries(wasteTypes).map(([type, data]) => (
         <StatCard key={type} type={type} total_quantity={data.total_quantity} />
       )),
-    [wasteTypes]
+    [wasteTypes],
   );
 
   const wasteTypesCards = useMemo(
@@ -30,14 +30,14 @@ const Overview = () => {
       Object.entries(wasteTypes).map(([type, data]) => (
         <WasteTypeCard key={type} type={type} percentage={data.percentage} />
       )),
-    [wasteTypes]
+    [wasteTypes],
   );
 
   useEffect(() => {
-    if (!hasData) {
+    if (!hasData && loading !== "pending") {
       dispatch(actGetWasteTypes());
     }
-  }, [dispatch, hasData, wasteTypes]);
+  }, [dispatch, hasData, loading]);
 
   return (
     <>
@@ -65,7 +65,7 @@ const Overview = () => {
         types of waste collected
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {loading === "pending"
           ? Array.from({ length: 5 }).map((_, i) => (
               <WasteTypeCardSkeleton key={i} />

@@ -80,7 +80,7 @@ const Menu = () => {
           <img
             src={logo}
             alt="EcoCollect logo"
-            className="w-full h-full object-contain"
+            className="object-contain w-full h-full"
           />
         </div>
         <div className="h-[1px] bg-[#F5F5F5] w-full mt-10" />
@@ -98,7 +98,7 @@ const Menu = () => {
                   cn(
                     "text-black text-2xl font-normal capitalize px-4 py-6 flex items-center gap-[4px]",
                     "hover:bg-transparent",
-                    isActive ? "border-l-4 rounded-l-[10px]" : ""
+                    isActive ? "border-l-4 rounded-l-[10px]" : "",
                   )
                 }
               >
@@ -121,7 +121,7 @@ const Menu = () => {
                   cn(
                     "text-black text-2xl font-normal capitalize px-4 py-6 flex items-center gap-[4px]",
                     "hover:bg-transparent",
-                    isActive ? "border-l-4 rounded-l-[10px]" : ""
+                    isActive ? "border-l-4 rounded-l-[10px]" : "",
                   )
                 }
               >
